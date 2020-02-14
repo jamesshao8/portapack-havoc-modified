@@ -131,3 +131,4 @@ Warning: won't reply to questions about flashing and compiling. See links above.
 Furrtek <furrtek@gmail.com>
 
 <http://www.furrtek.org>
+# portapack-havoc-modified

@@ -51,7 +51,7 @@ private:
 	static constexpr ui::Dim header_height = 3 * 16;
 	
 	uint32_t sample_rate = 0;
-	static constexpr uint32_t baseband_bandwidth = 2000000;
+	static constexpr uint32_t baseband_bandwidth = 3000000; //filter bandwidth
 	const size_t read_size { 16384 };
 	const size_t buffer_count { 3 };
 

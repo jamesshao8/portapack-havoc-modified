@@ -52,7 +52,7 @@ void ReplayProcessor::execute(const buffer_c8_t& buffer) {
 	// Since we're oversampling by 4M/500k = 8, we only need 2048/8 = 256 samples from the file and duplicate them 8 times each
 	// So 256 * 4 bytes per sample (C16) = 1024 bytes from the file
 	if( stream ) {                             //sizeof(*buffer.p) = sizeof(C8) = 2*int8 = 2 bytes //buffer.count = 2048
-		const size_t bytes_to_read = sizeof(*buffer.p) * 1 * (buffer.count / 8);	// *2 (C16), /8 (oversampling) should be == 1024
+		const size_t bytes_to_read = sizeof(*buffer.p) * 1 * (buffer.count );	// *2 (C16), /8 (oversampling) should be == 1024
 		bytes_read += stream->read(iq_buffer.p, bytes_to_read);
 	}
 	
@@ -65,17 +65,18 @@ void ReplayProcessor::execute(const buffer_c8_t& buffer) {
 			auto im_out = iq_buffer.p[i >> 3].imag() ;
 			buffer.p[i] = { (int8_t)re_out, (int8_t)im_out };
 		}*/
+                /*
                 if (i % 8 != 0) {
 			buffer.p[i] = buffer.p[i - 1];
 		} else {
 			auto re_out = iq_buffer.p[i/8].real() ;
 			auto im_out = iq_buffer.p[i/8].imag() ;
 			buffer.p[i] = { (int8_t)re_out, (int8_t)im_out };
-		}
-                /*
+		}*/
+                
                 auto re_out = iq_buffer.p[i].real() ;
 	        auto im_out = iq_buffer.p[i].imag() ;
-		buffer.p[i] = { (int8_t)re_out, (int8_t)im_out };*/
+		buffer.p[i] = { (int8_t)re_out, (int8_t)im_out };
 	}
 	
 	spectrum_samples += buffer.count;

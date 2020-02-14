@@ -47,11 +47,11 @@ private:
 
 	BasebandThread baseband_thread { baseband_fs, this, NORMALPRIO + 20, baseband::Direction::Transmit };
 
-	std::array<complex8_t, 256> iq { };
+	std::array<complex8_t, 2048> iq { };
 	const buffer_c8_t iq_buffer {
 		iq.data(),
 		iq.size(),
-		baseband_fs /4
+		baseband_fs 
 	};
 	
 	uint32_t channel_filter_pass_f = 0;

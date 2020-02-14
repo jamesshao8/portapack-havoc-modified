@@ -127,7 +127,7 @@ void GpsSimAppView::start() {
 
 	if( reader ) {
 		button_play.set_bitmap(&bitmap_stop);
-		baseband::set_sample_rate(sample_rate * 4);
+		baseband::set_sample_rate(sample_rate );
 		
 		replay_thread = std::make_unique<ReplayThread>(
 			std::move(reader),
@@ -142,7 +142,7 @@ void GpsSimAppView::start() {
 	
 	radio::enable({
 		receiver_model.tuning_frequency(),
-		sample_rate * 4,
+		sample_rate ,
 		baseband_bandwidth,
 		rf::Direction::Transmit,
 		receiver_model.rf_amp(),

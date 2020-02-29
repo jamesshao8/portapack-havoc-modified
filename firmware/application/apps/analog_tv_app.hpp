@@ -26,7 +26,7 @@
 #include "receiver_model.hpp"
 
 #include "ui_receiver.hpp"
-#include "ui_spectrum.hpp"
+#include "ui_tv.hpp"
 #include "ui_record_view.hpp"
 
 #include "ui_font_fixed_8x16.hpp"
@@ -105,7 +105,7 @@ public:
 
 	void focus() override;
 
-	std::string title() const override { return "Analog audio"; };
+	std::string title() const override { return "Analog TV"; };
 	
 private:
 	static constexpr ui::Dim header_height = 3 * 16;
@@ -146,8 +146,8 @@ private:
 		{
 			{ " AM ", toUType(ReceiverModel::Mode::AMAudio) },
 			{ "NFM ", toUType(ReceiverModel::Mode::NarrowbandFMAudio) },
-			{ "WFM ", toUType(ReceiverModel::Mode::WidebandFMAudio) },
-			{ "SPEC", toUType(ReceiverModel::Mode::SpectrumAnalysis) },
+			{ "TV ", toUType(ReceiverModel::Mode::WidebandFMAudio) },
+			//{ "SPEC", toUType(ReceiverModel::Mode::SpectrumAnalysis) },
 		}
 	};
 
@@ -171,7 +171,7 @@ private:
 		u"AUD_????", RecordView::FileType::WAV, 4096, 4
 	};
 
-	spectrum::WaterfallWidget waterfall { true };
+	tv::TVWidget tv { true };
 
 	void on_tuning_frequency_changed(rf::Frequency f);
 	void on_baseband_bandwidth_changed(uint32_t bandwidth_hz);

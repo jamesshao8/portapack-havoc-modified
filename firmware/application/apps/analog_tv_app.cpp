@@ -100,7 +100,7 @@ AnalogTvView::AnalogTvView(
 		&field_volume,
 		&text_ctcss,
 		&record_view,
-		&waterfall
+		&tv
 	});
 
 	field_frequency.set_value(receiver_model.tuning_frequency());
@@ -147,7 +147,7 @@ AnalogTvView::AnalogTvView(
 		nav.display_modal("Error", message);
 	};
 	
-	waterfall.on_select = [this](int32_t offset) {
+	tv.on_select = [this](int32_t offset) {
 		field_frequency.set_value(receiver_model.tuning_frequency() + offset);
 	};
 
@@ -169,15 +169,15 @@ AnalogTvView::~AnalogTvView() {
 void AnalogTvView::on_hide() {
 	// TODO: Terrible kludge because widget system doesn't notify Waterfall that
 	// it's being shown or hidden.
-	waterfall.on_hide();
+	tv.on_hide();
 	View::on_hide();
 }
 
 void AnalogTvView::set_parent_rect(const Rect new_parent_rect) {
 	View::set_parent_rect(new_parent_rect);
 	
-	const ui::Rect waterfall_rect { 0, header_height, new_parent_rect.width(), new_parent_rect.height() - header_height };
-	waterfall.set_parent_rect(waterfall_rect);
+	const ui::Rect tv_rect { 0, header_height, new_parent_rect.width(), new_parent_rect.height() - header_height };
+	tv.set_parent_rect(tv_rect);
 }
 
 void AnalogTvView::focus() {
@@ -195,10 +195,10 @@ void AnalogTvView::on_baseband_bandwidth_changed(uint32_t bandwidth_hz) {
 void AnalogTvView::on_modulation_changed(const ReceiverModel::Mode modulation) {
 	// TODO: Terrible kludge because widget system doesn't notify Waterfall that
 	// it's being shown or hidden.
-	waterfall.on_hide();
+	tv.on_hide();
 	update_modulation(modulation);
 	on_show_options_modulation();
-	waterfall.on_show();
+	tv.on_show();
 }
 
 void AnalogTvView::remove_options_widget() {
@@ -254,23 +254,23 @@ void AnalogTvView::on_show_options_modulation() {
 	switch(modulation) {
 	case ReceiverModel::Mode::AMAudio:
 		widget = std::make_unique<AMOptionsView_new>(options_view_rect, &style_options_group_new);
-		waterfall.show_audio_spectrum_view(false);
+		tv.show_audio_spectrum_view(false);
 		text_ctcss.hidden(true);
 		break;
 
 	case ReceiverModel::Mode::NarrowbandFMAudio:
 		widget = std::make_unique<NBFMOptionsView_new>(nbfm_view_rect, &style_options_group_new);
-		waterfall.show_audio_spectrum_view(false);
+		tv.show_audio_spectrum_view(false);
 		text_ctcss.hidden(false);
 		break;
 	
 	case ReceiverModel::Mode::WidebandFMAudio:
-		waterfall.show_audio_spectrum_view(true);
+		tv.show_audio_spectrum_view(true);
 		text_ctcss.hidden(true);
 		break;
 	
 	case ReceiverModel::Mode::SpectrumAnalysis:
-		waterfall.show_audio_spectrum_view(false);
+		tv.show_audio_spectrum_view(false);
 		text_ctcss.hidden(true);
 		break;
 		

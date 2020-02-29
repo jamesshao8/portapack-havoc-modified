@@ -42,7 +42,7 @@ public:
 	void on_message(const Message* const message) override;
 
 private:
-	static constexpr size_t baseband_fs = 6000000;
+	static constexpr size_t baseband_fs = 8000000;
 	static constexpr auto spectrum_rate_hz = 50.0f;
 
 	BasebandThread baseband_thread { baseband_fs, this, NORMALPRIO + 20, baseband::Direction::Receive };
@@ -53,6 +53,8 @@ private:
 		dst.data(),
 		dst.size()
 	};
+
+        //std::array<complex16_t, 512> spectrum { };
 	// work_audio_buffer and dst_buffer use the same data pointer
 	/*const buffer_s16_t work_audio_buffer {
 		(int16_t*)dst.data(),
@@ -90,7 +92,7 @@ private:
 		FFT
 	};*/
 	//AudioSpectrumState audio_spectrum_state { IDLE };
-	AudioSpectrum spectrum { };
+	AudioSpectrum audio_spectrum { };
 	//uint32_t fft_step { 0 };
 
 	TvCollector channel_spectrum { };

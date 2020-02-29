@@ -210,6 +210,7 @@ set(CPPSRC
 	ui/ui_receiver.cpp
 	ui/ui_rssi.cpp
 	ui/ui_spectrum.cpp
+	ui/ui_tv.cpp
 	ui/ui_tabview.cpp
 	ui/ui_textentry.cpp
 	ui/ui_transmitter.cpp

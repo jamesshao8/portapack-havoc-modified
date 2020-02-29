@@ -92,17 +92,39 @@ void TvCollector::post_message(const buffer_c16_t& data) {
 	// Called from baseband processing thread.
         float re, im;
 	float mag;
+        float max;
 	if( streaming && !channel_spectrum_request_update ) {
- 		for(size_t i=0; i<256; i++) 
+ 		/*for(size_t i=0; i<128; i++) 
 		{
 			const auto s = data.p[i];
                         re = (float)(data.p[i].real());
 			im = (float)(data.p[i].imag());
 			mag = __builtin_sqrtf((re * re) + (im * im)) ;
                         channel_spectrum[i] = {mag, mag};
-
 		}
-		channel_spectrum_sampling_rate = data.sampling_rate;
+                for(size_t i=128; i<256; i++) 
+		{
+			mag = 0 ;
+                        channel_spectrum[i] = {mag, mag};
+		}*/
+
+                for(size_t i=0; i<256; i++) 
+		{
+			const auto s = data.p[i];
+                        re = (float)(data.p[i].real());
+			im = (float)(data.p[i].imag());
+			mag = __builtin_sqrtf((re * re) + (im * im)) ;
+			/*if (mag > max)
+			{
+				max = mag;
+			}
+			double result = (255 - 255 *(mag/ blackLevel) );
+			channel_spectrum[i] = {result, result};*/
+			channel_spectrum[i] = {mag, mag};
+		}
+		//maxSignalLevel = maxSignalLevel * 0.9 + max * 0.1;
+		//blackLevel = maxSignalLevel * 0.4;
+                channel_spectrum_sampling_rate = data.sampling_rate;
 		channel_spectrum_request_update = true;
 		EventDispatcher::events_flag(EVT_MASK_SPECTRUM);
 	}
@@ -122,6 +144,8 @@ void TvCollector::update() {
 			//const float db = mag2_to_dbv_norm(mag2);
 			//constexpr float mag_scale = 5.0f;
 			const unsigned int v = corrected_sample + 127.0f;
+			//const unsigned int v = 255.0f - (corrected_sample + 127.0f); //maxSignalLevel 255.0f
+                        
                         //const unsigned int v = corrected_sample ;
 			spectrum.db[i] = std::max(0U, std::min(255U, v));
 		}

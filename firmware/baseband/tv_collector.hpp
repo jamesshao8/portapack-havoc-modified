@@ -63,6 +63,8 @@ private:
 	void stop();
 
 	void update();
+        //float maxSignalLevel;
+	//float blackLevel;
 };
 
 #endif/*__TV_COLLECTOR_H__*/

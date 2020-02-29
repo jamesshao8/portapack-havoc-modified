@@ -41,59 +41,6 @@ constexpr Style style_options_group_new {
 	.foreground = Color::white(),
 };
 
-class AMOptionsView_new : public View {
-public:
-	AMOptionsView_new(const Rect parent_rect, const Style* const style);
-
-private:
-	Text label_config {
-		{ 0 * 8, 0 * 16, 2 * 8, 1 * 16 },
-		"BW",
-	};
-
-	OptionsField options_config {
-		{ 3 * 8, 0 * 16 },
-		4,
-		{
-			{ "DSB ", 0 },
-			{ "USB ", 0 },
-			{ "LSB ", 0 },
-		}
-	};
-};
-
-class NBFMOptionsView_new : public View {
-public:
-	NBFMOptionsView_new(const Rect parent_rect, const Style* const style);
-
-private:
-	Text label_config {
-		{ 0 * 8, 0 * 16, 2 * 8, 1 * 16 },
-		"BW",
-	};
-	OptionsField options_config {
-		{ 3 * 8, 0 * 16 },
-		4,
-		{
-			{ " 8k5", 0 },
-			{ "11k ", 0 },
-			{ "16k ", 0 },
-		}
-	};
-	
-	Text text_squelch {
-		{ 9 * 8, 0 * 16, 8 * 8, 1 * 16 },
-		"SQ   /99"
-	};
-	NumberField field_squelch {
-		{ 12 * 8, 0 * 16 },
-		2,
-		{ 0, 99 },
-		1,
-		' ',
-	};
-};
-
 class AnalogTvView : public View {
 public:
 	AnalogTvView(NavigationView& nav);
@@ -114,7 +61,6 @@ private:
 	const Rect nbfm_view_rect { 0 * 8, 1 * 16, 18 * 8, 1 * 16 };
 
 	NavigationView& nav_;
-	//bool exit_on_squelch { false };
 	
 	RSSI rssi {
 		{ 21 * 8, 0, 6 * 8, 4 },
@@ -144,10 +90,9 @@ private:
 		{ 0 * 8, 0 * 16 },
 		4,
 		{
-			{ " AM ", toUType(ReceiverModel::Mode::AMAudio) },
-			{ "NFM ", toUType(ReceiverModel::Mode::NarrowbandFMAudio) },
 			{ "TV ", toUType(ReceiverModel::Mode::WidebandFMAudio) },
-			//{ "SPEC", toUType(ReceiverModel::Mode::SpectrumAnalysis) },
+			{ "TV ", toUType(ReceiverModel::Mode::WidebandFMAudio) },
+			{ "TV ", toUType(ReceiverModel::Mode::WidebandFMAudio) },
 		}
 	};
 
@@ -158,18 +103,8 @@ private:
 		1,
 		' ',
 	};
-	
-	Text text_ctcss {
-		{ 19 * 8, 1 * 16, 11 * 8, 1 * 16 },
-		""
-	};
 
 	std::unique_ptr<Widget> options_widget { };
-
-	RecordView record_view {
-		{ 0 * 8, 2 * 16, 30 * 8, 1 * 16 },
-		u"AUD_????", RecordView::FileType::WAV, 4096, 4
-	};
 
 	tv::TVWidget tv { true };
 
@@ -181,7 +116,6 @@ private:
 	void on_show_options_modulation();
 	void on_frequency_step_changed(rf::Frequency f);
 	void on_reference_ppm_correction_changed(int32_t v);
-	void on_headphone_volume_changed(int32_t v);
 	void on_edit_frequency();
 
 	void remove_options_widget();
@@ -189,24 +123,7 @@ private:
 
 	void update_modulation(const ReceiverModel::Mode modulation);
 	
-	//void squelched();
-	void handle_coded_squelch(const uint32_t value);
-	
-	/*MessageHandlerRegistration message_handler_squelch_signal {
-		Message::ID::RequestSignal,
-		[this](const Message* const p) {
-			(void)p;
-			this->squelched();
-		}
-	};*/
-	
-	MessageHandlerRegistration message_handler_coded_squelch {
-		Message::ID::CodedSquelch,
-		[this](const Message* const p) {
-			const auto message = *reinterpret_cast<const CodedSquelchMessage*>(p);
-			this->handle_coded_squelch(message.value);
-		}
-	};
+
 };
 
 } /* namespace ui */

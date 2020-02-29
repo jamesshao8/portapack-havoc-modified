@@ -38,51 +38,6 @@ using namespace tonekey;
 
 namespace ui {
 
-/* AMOptionsView_new *********************************************************/
-
-AMOptionsView_new::AMOptionsView_new(
-	const Rect parent_rect, const Style* const style
-) : View { parent_rect }
-{
-	set_style(style);
-
-	add_children({
-		&label_config,
-		&options_config,
-	});
-
-	options_config.set_selected_index(receiver_model.am_configuration());
-	options_config.on_change = [this](size_t n, OptionsField::value_t) {
-		receiver_model.set_am_configuration(n);
-	};
-}
-
-/* NBFMOptionsView_new *******************************************************/
-
-NBFMOptionsView_new::NBFMOptionsView_new(
-	const Rect parent_rect, const Style* const style
-) : View { parent_rect }
-{
-	set_style(style);
-
-	add_children({
-		&label_config,
-		&options_config,
-		&text_squelch,
-		&field_squelch
-	});
-
-	options_config.set_selected_index(receiver_model.nbfm_configuration());
-	options_config.on_change = [this](size_t n, OptionsField::value_t) {
-		receiver_model.set_nbfm_configuration(n);
-	};
-	
-	field_squelch.set_value(receiver_model.squelch_level());
-	field_squelch.on_change = [this](int32_t v) {
-		receiver_model.set_squelch_level(v);
-	};
-}
-
 /* AnalogTvView *******************************************************/
 
 AnalogTvView::AnalogTvView(
@@ -98,8 +53,6 @@ AnalogTvView::AnalogTvView(
 		&field_vga,
 		&options_modulation,
 		&field_volume,
-		&text_ctcss,
-		&record_view,
 		&tv
 	});
 
@@ -130,7 +83,7 @@ AnalogTvView::AnalogTvView(
 	};
 
 	const auto modulation = receiver_model.modulation();
-	options_modulation.set_by_value(toUType(modulation));
+	options_modulation.set_by_value(toUType(ReceiverModel::Mode::WidebandFMAudio));
 	options_modulation.on_change = [this](size_t, OptionsField::value_t v) {
 		this->on_modulation_changed(static_cast<ReceiverModel::Mode>(v));
 	};
@@ -138,22 +91,14 @@ AnalogTvView::AnalogTvView(
 		this->on_show_options_modulation();
 	};
 
-	field_volume.set_value((receiver_model.headphone_volume() - audio::headphone::volume_range().max).decibel() + 99);
-	field_volume.on_change = [this](int32_t v) {
-		this->on_headphone_volume_changed(v);
-	};
-
-	record_view.on_error = [&nav](std::string message) {
-		nav.display_modal("Error", message);
-	};
+	field_volume.set_value(99);
 	
 	tv.on_select = [this](int32_t offset) {
 		field_frequency.set_value(receiver_model.tuning_frequency() + offset);
 	};
 
-	audio::output::start();
-
 	update_modulation(static_cast<ReceiverModel::Mode>(modulation));
+        on_modulation_changed(ReceiverModel::Mode::WidebandFMAudio);
 }
 
 AnalogTvView::~AnalogTvView() {
@@ -251,33 +196,8 @@ void AnalogTvView::on_show_options_modulation() {
 	std::unique_ptr<Widget> widget;
 
 	const auto modulation = static_cast<ReceiverModel::Mode>(receiver_model.modulation());
-	switch(modulation) {
-	case ReceiverModel::Mode::AMAudio:
-		widget = std::make_unique<AMOptionsView_new>(options_view_rect, &style_options_group_new);
-		tv.show_audio_spectrum_view(false);
-		text_ctcss.hidden(true);
-		break;
-
-	case ReceiverModel::Mode::NarrowbandFMAudio:
-		widget = std::make_unique<NBFMOptionsView_new>(nbfm_view_rect, &style_options_group_new);
-		tv.show_audio_spectrum_view(false);
-		text_ctcss.hidden(false);
-		break;
+	tv.show_audio_spectrum_view(true);
 	
-	case ReceiverModel::Mode::WidebandFMAudio:
-		tv.show_audio_spectrum_view(true);
-		text_ctcss.hidden(true);
-		break;
-	
-	case ReceiverModel::Mode::SpectrumAnalysis:
-		tv.show_audio_spectrum_view(false);
-		text_ctcss.hidden(true);
-		break;
-		
-	default:
-		break;
-	}
-
 	set_options_widget(std::move(widget));
 	options_modulation.set_style(&style_options_group_new);
 }
@@ -291,80 +211,21 @@ void AnalogTvView::on_reference_ppm_correction_changed(int32_t v) {
 	persistent_memory::set_correction_ppb(v * 1000);
 }
 
-void AnalogTvView::on_headphone_volume_changed(int32_t v) {
-	const auto new_volume = volume_t::decibel(v - 99) + audio::headphone::volume_range().max;
-	receiver_model.set_headphone_volume(new_volume);
-}
 
 void AnalogTvView::update_modulation(const ReceiverModel::Mode modulation) {
 	audio::output::mute();
-	record_view.stop();
 
 	baseband::shutdown();
 
 	portapack::spi_flash::image_tag_t image_tag;
-	switch(modulation) {
-	case ReceiverModel::Mode::AMAudio:				image_tag = portapack::spi_flash::image_tag_am_audio;			break;
-	case ReceiverModel::Mode::NarrowbandFMAudio:	image_tag = portapack::spi_flash::image_tag_nfm_audio;			break;
-	case ReceiverModel::Mode::WidebandFMAudio:		image_tag = portapack::spi_flash::image_tag_am_tv;			break;
-	case ReceiverModel::Mode::SpectrumAnalysis:		image_tag = portapack::spi_flash::image_tag_wideband_spectrum;	break;
-	default:
-		return;
-	}
+	image_tag = portapack::spi_flash::image_tag_am_tv;	
 
 	baseband::run_image(image_tag);
-	
-	if (modulation == ReceiverModel::Mode::SpectrumAnalysis) {
-		baseband::set_spectrum(20000000, 127);
-	}
 
-	const auto is_wideband_spectrum_mode = (modulation == ReceiverModel::Mode::SpectrumAnalysis);
 	receiver_model.set_modulation(modulation);
-	//receiver_model.set_sampling_rate(is_wideband_spectrum_mode ? 20000000 : 3072000);
-        receiver_model.set_sampling_rate(is_wideband_spectrum_mode ? 20000000 : 8000000);
-	//receiver_model.set_baseband_bandwidth(is_wideband_spectrum_mode ? 12000000 : 1750000);
-        receiver_model.set_baseband_bandwidth(is_wideband_spectrum_mode ? 12000000 : 1000000);
+        receiver_model.set_sampling_rate(8000000);
+        receiver_model.set_baseband_bandwidth(1000000);
 	receiver_model.enable();
-
-	// TODO: This doesn't belong here! There's a better way.
-	size_t sampling_rate = 0;
-	switch(modulation) {
-	case ReceiverModel::Mode::AMAudio:				sampling_rate = 12000; break;
-	case ReceiverModel::Mode::NarrowbandFMAudio:	sampling_rate = 24000; break;
-	case ReceiverModel::Mode::WidebandFMAudio:		sampling_rate = 48000; break;
-	default:
-		break;
-	}
-	record_view.set_sampling_rate(sampling_rate);
-
-	if( !is_wideband_spectrum_mode ) {
-		audio::output::unmute();
-	}
-}
-
-/*void AnalogTvView::squelched() {
-	if (exit_on_squelch) nav_.pop();
-}*/
-
-void AnalogTvView::handle_coded_squelch(const uint32_t value) {
-	float diff, min_diff = value;
-	size_t min_idx { 0 };
-	size_t c;
-	
-	// Find nearest match
-	for (c = 0; c < tone_keys.size(); c++) {
-		diff = abs(((float)value / 100.0) - tone_keys[c].second);
-		if (diff < min_diff) {
-			min_idx = c;
-			min_diff = diff;
-		}
-	}
-	
-	// Arbitrary confidence threshold
-	if (min_diff < 40)
-		text_ctcss.set("CTCSS " + tone_keys[min_idx].first);
-	else
-		text_ctcss.set("???");
 }
 
 } /* namespace ui */

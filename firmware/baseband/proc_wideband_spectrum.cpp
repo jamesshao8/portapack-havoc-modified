@@ -59,6 +59,18 @@ void WidebandSpectrum::execute(const buffer_c8_t& buffer) {
 	} else {
 		phase++;
 	}
+
+
+/*
+	std::fill(spectrum.begin(), spectrum.end(), 0);
+	for(size_t i=0; i<256; i++) {
+		spectrum[i] += buffer.p[i];
+	}
+
+	const buffer_c16_t buffer_c16 {spectrum.data(),256,buffer.sampling_rate};
+	channel_spectrum.feed(buffer_c16,0, 0);
+*/
+
 }
 
 void WidebandSpectrum::on_message(const Message* const msg) {

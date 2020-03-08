@@ -91,7 +91,10 @@ AnalogTvView::AnalogTvView(
 		this->on_show_options_modulation();
 	};
 
-	field_volume.set_value(99);
+	field_volume.set_value(0);
+	field_volume.on_change = [this](int32_t v) {
+		this->on_headphone_volume_changed(v);
+	};
 	
 	tv.on_select = [this](int32_t offset) {
 		field_frequency.set_value(receiver_model.tuning_frequency() + offset);
@@ -211,6 +214,9 @@ void AnalogTvView::on_reference_ppm_correction_changed(int32_t v) {
 	persistent_memory::set_correction_ppb(v * 1000);
 }
 
+void AnalogTvView::on_headphone_volume_changed(int32_t v) {
+	//tv::TVView::set_headphone_volume(this,v);
+}
 
 void AnalogTvView::update_modulation(const ReceiverModel::Mode modulation) {
 	audio::output::mute();
@@ -223,8 +229,8 @@ void AnalogTvView::update_modulation(const ReceiverModel::Mode modulation) {
 	baseband::run_image(image_tag);
 
 	receiver_model.set_modulation(modulation);
-        receiver_model.set_sampling_rate(8000000);
-        receiver_model.set_baseband_bandwidth(1000000);
+        receiver_model.set_sampling_rate(2000000);
+        receiver_model.set_baseband_bandwidth(2000000);
 	receiver_model.enable();
 }
 

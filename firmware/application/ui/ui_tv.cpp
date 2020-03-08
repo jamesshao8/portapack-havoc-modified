@@ -45,25 +45,24 @@ TimeScopeView::TimeScopeView(
 	set_focusable(true);
 	
 	add_children({
-		&labels,
-		&field_frequency,
+		//&labels,
+		//&field_frequency,
 		&waveform
 	});
 	
-	field_frequency.on_change = [this](int32_t) {
+	/*field_frequency.on_change = [this](int32_t) {
 		set_dirty();
 	};
-	field_frequency.set_value(0);
+	field_frequency.set_value(10);*/
 }
 
 void TimeScopeView::paint(Painter& painter) {
 	const auto r = screen_rect();
 
 	painter.fill_rectangle(r, Color::black());
-
-	//if( !spectrum_sampling_rate ) return;
 	
 	// Cursor
+	/*
 	const Rect r_cursor {
 		field_frequency.value() / (48000 / 240), r.bottom() - 32 - cursor_band_height,
 		1, cursor_band_height
@@ -71,202 +70,13 @@ void TimeScopeView::paint(Painter& painter) {
 	painter.fill_rectangle(
 		r_cursor,
 		Color::red()
-	);
+	);*/
 }
 
 void TimeScopeView::on_audio_spectrum(const AudioSpectrum* spectrum) {
 	for (size_t i = 0; i < spectrum->db.size(); i++)
 		audio_spectrum[i] = ((int16_t)spectrum->db[i] - 127) * 256;
 	waveform.set_dirty();
-}
-
-/* PostionScale ********************************************************/
-
-void PostionScale::on_show() {
-	clear();
-}
-
-void PostionScale::set_spectrum_sampling_rate(const int new_sampling_rate) {
-	if( (spectrum_sampling_rate != new_sampling_rate) ) {
-		spectrum_sampling_rate = new_sampling_rate;
-		set_dirty();
-	}
-}
-
-void PostionScale::set_channel_filter(
-	const int pass_frequency,
-	const int stop_frequency
-) {
-	if( (channel_filter_pass_frequency != pass_frequency) ||
-		(channel_filter_stop_frequency != stop_frequency) ) {
-		channel_filter_pass_frequency = pass_frequency;
-		channel_filter_stop_frequency = stop_frequency;
-		set_dirty();
-	}
-}
-
-void PostionScale::paint(Painter& painter) {
-	const auto r = screen_rect();
-
-	clear_background(painter, r);
-
-	if( !spectrum_sampling_rate ) {
-		// Can't draw without non-zero scale.
-		return;
-	}
-
-	draw_filter_ranges(painter, r);
-	draw_frequency_ticks(painter, r);
-	
-	if (_blink) {
-		const Rect r_cursor {
-			120 + cursor_position, r.bottom() - filter_band_height,
-			2, filter_band_height
-		};
-		painter.fill_rectangle(
-			r_cursor,
-			Color::red()
-		);
-	}
-}
-
-void PostionScale::clear() {
-	spectrum_sampling_rate = 0;
-	set_dirty();
-}
-
-void PostionScale::clear_background(Painter& painter, const Rect r) {
-	painter.fill_rectangle(r, Color::black());
-}
-
-void PostionScale::draw_frequency_ticks(Painter& painter, const Rect r) {
-	const auto x_center = r.width() / 2;
-
-	const Rect tick { r.left() + x_center, r.top(), 1, r.height() };
-	painter.fill_rectangle(tick, Color::white());
-
-	constexpr int tick_count_max = 4;
-	float rough_tick_interval = float(spectrum_sampling_rate) / tick_count_max;
-	int magnitude = 1;
-	int magnitude_n = 0;
-	while(rough_tick_interval >= 10.0f) {
-		rough_tick_interval /= 10;
-		magnitude *= 10;
-		magnitude_n += 1;
-	}
-	const int tick_interval = std::ceil(rough_tick_interval);
-
-	auto tick_offset = tick_interval;
-	while((tick_offset * magnitude) < spectrum_sampling_rate / 2) {
-		const Dim pixel_offset = tick_offset * magnitude * spectrum_bins / spectrum_sampling_rate;
-
-		const std::string zero_pad =
-			((magnitude_n % 3) == 0) ? "" :
-			((magnitude_n % 3) == 1) ? "0" : "00";
-		const std::string unit =
-			(magnitude_n >= 6) ? "M" :
-			(magnitude_n >= 3) ? "k" : "";
-		const std::string label = to_string_dec_uint(tick_offset) + zero_pad + unit;
-		const auto label_width = style().font.size_of(label).width();
-		
-		const Coord offset_low = r.left() + x_center - pixel_offset;
-		const Rect tick_low { offset_low, r.top(), 1, r.height() };
-		painter.fill_rectangle(tick_low, Color::white());
-		painter.draw_string({ offset_low + 2, r.top() }, style(), label );
-
-		const Coord offset_high = r.left() + x_center + pixel_offset;
-		const Rect tick_high { offset_high, r.top(), 1, r.height() };
-		painter.fill_rectangle(tick_high, Color::white());
-		painter.draw_string({ offset_high - 2 - label_width, r.top() }, style(), label );
-
-		tick_offset += tick_interval;
-	}
-}
-
-void PostionScale::draw_filter_ranges(Painter& painter, const Rect r) {
-	if( channel_filter_pass_frequency ) {
-		const auto x_center = r.width() / 2;
-
-		const auto pass_offset = channel_filter_pass_frequency * spectrum_bins / spectrum_sampling_rate;
-		const auto stop_offset = channel_filter_stop_frequency * spectrum_bins / spectrum_sampling_rate;
-
-		const auto pass_x_lo = x_center - pass_offset;
-		const auto pass_x_hi = x_center + pass_offset;
-
-		if( channel_filter_stop_frequency ) {
-			const auto stop_x_lo = x_center - stop_offset;
-			const auto stop_x_hi = x_center + stop_offset;
-
-			const Rect r_stop_lo {
-				r.left() + stop_x_lo, r.bottom() - filter_band_height,
-				pass_x_lo - stop_x_lo, filter_band_height
-			};
-			painter.fill_rectangle(
-				r_stop_lo,
-				Color::yellow()
-			);
-
-			const Rect r_stop_hi {
-				r.left() + pass_x_hi, r.bottom() - filter_band_height,
-				stop_x_hi - pass_x_hi, filter_band_height
-			};
-			painter.fill_rectangle(
-				r_stop_hi,
-				Color::yellow()
-			);
-		}
-
-		const Rect r_pass {
-			r.left() + pass_x_lo, r.bottom() - filter_band_height,
-			pass_x_hi - pass_x_lo, filter_band_height
-		};
-		painter.fill_rectangle(
-			r_pass,
-			Color::green()
-		);
-	}
-}
-
-void PostionScale::on_focus() {
-	_blink = true;
-	on_tick_second();
-	signal_token_tick_second = rtc_time::signal_tick_second += [this]() {
-		this->on_tick_second();
-	};
-}
-
-void PostionScale::on_blur() {
-	rtc_time::signal_tick_second -= signal_token_tick_second;
-	_blink = false;
-	set_dirty();
-}
-
-bool PostionScale::on_encoder(const EncoderEvent delta) {
-	cursor_position += delta;
-	
-	cursor_position = std::min<int32_t>(cursor_position, 119);
-	cursor_position = std::max<int32_t>(cursor_position, -120);
-	
-	set_dirty();
-	
-	return true;
-}
-
-bool PostionScale::on_key(const KeyEvent key) {
-	if( key == KeyEvent::Select ) {
-		if( on_select ) {
-			on_select((cursor_position * spectrum_sampling_rate) / 240);
-			cursor_position = 0;
-			return true;
-		}
-	}
-	
-	return false;
-}
-
-void PostionScale::on_tick_second() {
-	set_dirty();
-	_blink = !_blink;
 }
 
 /* TVView *********************************************************/
@@ -290,33 +100,76 @@ void TVView::paint(Painter& painter) {
 	(void)painter;
 }
 
+void TVView::on_adjust_xcorr(uint8_t xcorr){
+	x_correction = xcorr;
+}
+
 void TVView::on_channel_spectrum(
 	const ChannelSpectrum& spectrum
 ) {
-	/* TODO: static_assert that message.spectrum.db.size() >= pixel_row.size() */
+	//portapack has limitations
+        // 1.screen resolution (less than 240x320) 2.samples each call back (128 or 256)
+	// 3.memory size (for ui::Color, the buffer size
+	//spectrum.db[i] is 256 long
+	//768x625 ->128x625 ->128x312 -> 128x104
+	//originally @6MHz sample rate, the PAL should be 768x625
+        //I reduced sample rate to 2MHz(3 times less samples), then calculate mag (effectively decimate by 2)
+	//the resolution is now changed to 128x625. The total decimation factor is 6, which changes how many samples in a line
+	//However 625 is too large for the screen, also interlaced scanning is harder to realize in portapack than normal computer.
+        //So I decided to simply drop half of the lines, once y is larger than 625/2=312.5 or 312, I recognize it as a new frame.
+        //then the resolution is changed to 128x312
+        //128x312 is now able to put into a 240x320 screen, but the buffer for a whole frame is 128x312=39936, which is too large
+        //according to my test, I can only make a buffer with a length of 13312 of type ui::Color. which is 1/3 of what I wanted.
+        //So now the resolution is changed to 128x104, the height is shrinked to 1/3 of the original height.
+        //I was expecting to see 1/3 height of original video.
 
-	std::array<Color, 240> pixel_row;
-	
-        /*for(size_t i=0; i<120; i++) {
-		const auto pixel_color = spectrum_rgb4_lut[spectrum.db[256 - 120 + i]];
-		pixel_row[i] = pixel_color;
-	}
+        //Look how nice is that! I am now able to meet the requirements of 1 and 3 for portapack. Also the length of a line is 128
+        //Each call back gives me 256 samples which is exactly 2 lines. What a coincidence!
 
-	for(size_t i=120; i<240; i++) {
-		const auto pixel_color = spectrum_rgb4_lut[spectrum.db[i - 120]];
-		pixel_row[i] = pixel_color;
-	}*/
-        for(size_t i=0; i<240; i++) 
+	//After some experiment, I did some improvements.
+	//1.I found that instead of 1/3 of the frame is shown, I got 3 whole frames shrinked into one window.
+	//So I made the height twice simply by painting 2 identical lines in the place of original lines
+	//2.I found sometimes there is an horizontal offset, so I added x_correction to move the frame back to center manually
+	//3.I changed video_buffer's type, from ui::Color to uint_8, since I don't need 3 digit to represent a grey scale value.
+	//I was hoping that by doing this, I can have a longer buffer like 39936, then the frame will looks better vertically
+	//however this is useless until now.	
+
+	for(size_t i=0; i<256; i++) 
 	{
-		const auto pixel_color = spectrum_rgb4_lut[spectrum.db[i]];
-		pixel_row[i] = pixel_color;
+		//video_buffer[i+count*256] = spectrum_rgb4_lut[spectrum.db[i]];
+		video_buffer_int[i+count*256] = 255 - spectrum.db[i];
 	}
-	const auto draw_y = display.scroll(1);
+	count = count + 1;
+	if (count == 52 -1)
+	{
+		ui::Color line_buffer[128];
+		Coord line;
+		uint32_t bmp_px;
 
-	display.draw_pixels(
-		{ { 0, draw_y }, { pixel_row.size(), 1 } },
-		pixel_row
-	);
+		/*for (line = 0; line < 104; line++)
+		{
+			for (bmp_px = 0; bmp_px < 128; bmp_px++) 
+			{
+				//line_buffer[bmp_px] = video_buffer[bmp_px+line*128];
+				line_buffer[bmp_px] = spectrum_rgb4_lut[video_buffer_int[bmp_px+line*128 + x_correction]];
+			}
+
+			display.render_line({ 0, line + 100 }, 128, line_buffer);
+		}*/
+		for (line = 0; line < 208; line=line+2)
+		{
+			for (bmp_px = 0; bmp_px < 128; bmp_px++) 
+			{
+				//line_buffer[bmp_px] = video_buffer[bmp_px+line*128];
+				line_buffer[bmp_px] = spectrum_rgb4_lut[video_buffer_int[bmp_px+line/2*128 + x_correction]];
+			}
+
+			display.render_line({ 0, line + 100 }, 128, line_buffer);
+			display.render_line({ 0, line + 101 }, 128, line_buffer);
+		}
+		count = 0;
+	}
+
 }
 
 void TVView::clear() {
@@ -331,15 +184,9 @@ void TVView::clear() {
 TVWidget::TVWidget(const bool cursor) {
 	add_children({
 		&tv_view,
-		&frequency_scale
+		&field_xcorr
 	});
-	
-	frequency_scale.set_focusable(cursor);
-	
-	// Making the event climb up all the way up to here kinda sucks
-	frequency_scale.on_select = [this](int32_t offset) {
-		if (on_select) on_select(offset);
-	};
+	field_xcorr.set_value(10);
 }
 
 void TVWidget::on_show() {
@@ -367,10 +214,8 @@ void TVWidget::show_audio_spectrum_view(const bool show) {
 
 void TVWidget::update_widgets_rect() {
 	if (audio_spectrum_view) {
-		frequency_scale.set_parent_rect({ 0, audio_spectrum_height, screen_rect().width(), scale_height });
 		tv_view.set_parent_rect(tv_reduced_rect);
 	} else {
-		frequency_scale.set_parent_rect({ 0, 0, screen_rect().width(), scale_height });
 		tv_view.set_parent_rect(tv_normal_rect);
 	}
 	tv_view.on_show();
@@ -392,12 +237,9 @@ void TVWidget::paint(Painter& painter) {
 
 void TVWidget::on_channel_spectrum(const ChannelSpectrum& spectrum) {
 	tv_view.on_channel_spectrum(spectrum);
+	tv_view.on_adjust_xcorr(field_xcorr.value());
 	sampling_rate = spectrum.sampling_rate;
-	frequency_scale.set_spectrum_sampling_rate(sampling_rate);
-	frequency_scale.set_channel_filter(
-		spectrum.channel_filter_pass_frequency,
-		spectrum.channel_filter_stop_frequency
-	);
+	
 }
 
 void TVWidget::on_audio_spectrum() {

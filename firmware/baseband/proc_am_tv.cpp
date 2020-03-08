@@ -33,34 +33,15 @@ void WidebandFMAudio::execute(const buffer_c8_t& buffer) {
 		return;
 	}
 	
-	
-/*
-	for(size_t i=0; i<128; i++) {
+	std::fill(spectrum.begin(), spectrum.end(), 0);
+
+	for(size_t i=0; i<spectrum.size(); i++) {
 		spectrum[i] += buffer.p[i];
 	}
 
-	
-	const buffer_c16_t buffer_c16 
-	{
-		spectrum.data(),
-		spectrum.size(),
-		buffer.sampling_rate
-	};
-	channel_spectrum.feed(buffer_c16,0, 0);
-*/
-	
-        
-	const auto decim_0_out = decim_0.execute(buffer, dst_buffer);
-	const auto channel = decim_1.execute(decim_0_out, dst_buffer);
+	const buffer_c16_t buffer_c16 {spectrum.data(),spectrum.size(),buffer.sampling_rate};
+	channel_spectrum.feed(buffer_c16);
 
-
-	spectrum_samples += channel.count;
-	if( spectrum_samples >= spectrum_interval_samples ) 
-	{
-		spectrum_samples -= spectrum_interval_samples;
-		channel_spectrum.feed(channel, 0, 0);
-	}
-        
         int8_t re, im;
 	int8_t mag;
 
@@ -69,18 +50,11 @@ void WidebandFMAudio::execute(const buffer_c8_t& buffer) {
 		re = buffer.p[i].real();
 		im = buffer.p[i].imag();
 		mag = __builtin_sqrtf((re * re) + (im * im)) ;
-
-		//const unsigned int v =  (float)(mag) + 127.0f; //am demodulated
 		const unsigned int v =  re + 127.0f; //timescope
-
 		audio_spectrum.db[i] = std::max(0U, std::min(255U, v));
 	}
-
-
 	AudioSpectrumMessage message { &audio_spectrum };
 	shared_memory.application_queue.push(message);
-	
-	
 }
 
 void WidebandFMAudio::on_message(const Message* const message) {
@@ -100,24 +74,6 @@ void WidebandFMAudio::on_message(const Message* const message) {
 }
 
 void WidebandFMAudio::configure(const WFMConfigureMessage& message) {
-	constexpr size_t decim_0_input_fs = baseband_fs;
-	constexpr size_t decim_0_output_fs = decim_0_input_fs / decim_0.decimation_factor;
-
-	constexpr size_t decim_1_input_fs = decim_0_output_fs;
-	constexpr size_t decim_1_output_fs = decim_1_input_fs / decim_1.decimation_factor;
-
-	constexpr size_t demod_input_fs = decim_1_output_fs;
-
-	//spectrum_interval_samples = decim_1_output_fs / spectrum_rate_hz;
-	spectrum_interval_samples = 128;
-	spectrum_samples = 0;
-
-	decim_0.configure(message.decim_0_filter.taps, 33554432);
-	decim_1.configure(message.decim_1_filter.taps, 131072);
-	channel_filter_pass_f = message.decim_1_filter.pass_frequency_normalized * decim_1_input_fs; //*10 spectrum will be good
-	channel_filter_stop_f = message.decim_1_filter.stop_frequency_normalized * decim_1_input_fs; //timescope will be wrong, *1 vice versa
-	channel_spectrum.set_decimation_factor(1);
-
 	configured = true;
 }
 

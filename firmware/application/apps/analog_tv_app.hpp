@@ -97,9 +97,9 @@ private:
 	};
 
 	NumberField field_volume {
-		{ 28 * 8, 0 * 16 },
-		2,
-		{ 0, 99 },
+		{ 27 * 8, 0 * 16 },
+		3,
+		{ 0, 255 },
 		1,
 		' ',
 	};
@@ -116,6 +116,7 @@ private:
 	void on_show_options_modulation();
 	void on_frequency_step_changed(rf::Frequency f);
 	void on_reference_ppm_correction_changed(int32_t v);
+	void on_headphone_volume_changed(int32_t v);
 	void on_edit_frequency();
 
 	void remove_options_widget();

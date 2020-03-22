@@ -42,16 +42,8 @@ public:
 	void on_message(const Message* const message) override;
 	
 private:
-	static constexpr size_t baseband_fs = 8000000;
+	static constexpr size_t baseband_fs = 4000000;
 	static constexpr size_t audio_fs = baseband_fs / 8 / 8 / 2;
-	
-	size_t samples_per_bit { };
-	
-	enum State {
-		WAIT_START = 0,
-		WAIT_STOP,
-		RECEIVE
-	};
 	
 	BasebandThread baseband_thread { baseband_fs, this, NORMALPRIO + 20, baseband::Direction::Receive };
 	RSSIThread rssi_thread { NORMALPRIO + 10 };
@@ -61,16 +53,19 @@ private:
 		dst.data(),
 		dst.size()
 	};
-	//std::array<float, 32> audio { };
-	/*const buffer_f32_t audio_buffer {
-		audio.data(),
-		audio.size()
-	};*/
+
+        std::array<complex16_t, 512> spectrum { };
+	const buffer_c16_t spectrum_buffer {
+		spectrum.data(),
+		spectrum.size()
+	};
+
 	const buffer_s16_t work_audio_buffer {
 		(int16_t*)dst.data(),
 		sizeof(dst) / sizeof(int16_t)
 	};
-	
+
+
 	// Array size ok down to 375 bauds (24000 / 375)
 	std::array<int32_t, 64> delay_line { 0 };
 	std::array<int16_t, 1000> rb_buf { 0 };
@@ -88,24 +83,8 @@ private:
 	int skipSamples {1000};
 	int RB_SIZE {1000};
 
-	AudioOutput audio_output { };
-
-	State state { };
-	size_t delay_line_index { };
-	uint32_t bit_counter { 0 };
-	uint32_t word_bits { 0 };
-	uint32_t sample_bits { 0 };
-	uint32_t phase { }, phase_inc { };
-	int32_t sample_mixed { }, prev_mixed { }, sample_filtered { }, prev_filtered { };
-	uint32_t word_length { };
-	uint32_t word_mask { };
-	uint32_t trigger_value { };
-	
 	bool configured { false };
-	bool wait_start { };
-	bool bit_value { };
-	bool trigger_word { };
-	bool triggered { };
+
 	
 	void configure(const BTLERxConfigureMessage& message);
 	

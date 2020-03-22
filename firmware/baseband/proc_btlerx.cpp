@@ -26,30 +26,39 @@
 #include "event_m4.hpp"
 
 void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
-	// This is called at 3072000 / 2048 = 1500Hz
-
 	if (!configured) return;
 	
 	// FM demodulation
-	/*const auto decim_0_out = decim_0.execute(buffer, dst_buffer);				// 2048 / 8 = 256 (512 I/Q samples)
-	const auto decim_1_out = decim_1.execute(decim_0_out, dst_buffer);			// 256 / 8 = 32 (64 I/Q samples)
-	const auto channel_out = channel_filter.execute(decim_1_out, dst_buffer);	// 32 / 2 = 16 (32 I/Q samples)*/
 
-	const auto decim_0_out = decim_0.execute(buffer, dst_buffer);
+	/*const auto decim_0_out = decim_0.execute(buffer, dst_buffer);
 	const auto channel = decim_1.execute(decim_0_out, dst_buffer);
 
 	feed_channel_stats(channel);
 	
-	auto audio_oversampled = demod.execute(channel, work_audio_buffer);
+	auto audio_oversampled = demod.execute(channel, work_audio_buffer);*/
+
+	const auto decim_0_out = decim_0.execute(buffer, dst_buffer);
+	feed_channel_stats(decim_0_out);
 	
-	//audio_output.write(audio_oversampled);
+	auto audio_oversampled = demod.execute(decim_0_out, work_audio_buffer);
+
+	/*std::fill(spectrum.begin(), spectrum.end(), 0);
+	for(size_t i=0; i<spectrum.size(); i++) {
+		spectrum[i] += buffer.p[i];
+	}
+	const buffer_c16_t buffer_c16 {spectrum.data(),spectrum.size(),buffer.sampling_rate};
+	feed_channel_stats(buffer_c16);
+	
+	auto audio_oversampled = demod.execute(buffer_c16, work_audio_buffer);*/
 	// Audio signal processing
 	for (size_t c = 0; c < audio_oversampled.count; c++) {
-		const int32_t sample_int = audio_oversampled.p[c] * 32768.0f;
-		int32_t current_sample = __SSAT(sample_int, 16);
 		int result;
-		current_sample /= 128;
+
+		/*const int32_t sample_int = audio_oversampled.p[c] * 32768.0f;
+		int32_t current_sample = __SSAT(sample_int, 16);
+		current_sample /= 128;*/
                 
+		int32_t current_sample = audio_oversampled.p[c]; //if I directly use this, some results can pass crc but not correct.
                 rb_head++;
 	        rb_head=(rb_head)%RB_SIZE;
 
@@ -89,7 +98,8 @@ void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
 			}
 			
 			bool packet_detected=false;
-			if ( transitions==4 && abs(g_threshold)<15500)
+			//if ( transitions==4 && abs(g_threshold)<15500)
+			if ( transitions==4)
 			{
 
 				
@@ -165,36 +175,12 @@ void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
 
 				    uint8_t byte_temp3 = (uint8_t) (((packet_header_arr[1] * 0x0802LU & 0x22110LU) | (packet_header_arr[1] * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16);
 				    packet_length=byte_temp3&0x3F;
-
-
-				    /*data_message.is_data = true;
-				    data_message.value = packet_length;
-				    shared_memory.application_queue.push(data_message);*/
 				
 				} 
 				else 
 				{
 				    packet_length=0;
 				}
-
-				/*phase += 1;
-				if (phase >= 1000) 
-				{
-						phase = 0;		
-						result = packet_addr_l;
-						data_message.is_data = true;
-						data_message.value = result >> 24;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = result >> 16;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = result >> 8;
-						shared_memory.application_queue.push(data_message);	
-						data_message.is_data = true;
-						data_message.value = result;
-						shared_memory.application_queue.push(data_message);	
-				}*/
 
 				for (int t=0;t<packet_length+2+3;t++)
 				{
@@ -273,54 +259,8 @@ void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
 				packet_crc=0;
 				for (int c=0;c<3;c++) packet_crc=(packet_crc<<8)|packet_data[packet_length+2+c];
 
-				
-				/*if (packet_addr_l==0x8E89BED6)
-				{  
-						data_message.is_data = true;
-						data_message.value = calced_crc>>24;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = calced_crc>>16;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = calced_crc>>8;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = calced_crc;
-						shared_memory.application_queue.push(data_message);
-
-						data_message.is_data = true;
-						data_message.value = packet_crc>>24;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = packet_crc>>16;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = packet_crc>>8;
-						shared_memory.application_queue.push(data_message);
-						data_message.is_data = true;
-						data_message.value = packet_crc;
-						shared_memory.application_queue.push(data_message);
-
-				}*/
-				/*if (packet_crc==calced_crc)
-				{
-				    uint8_t mac_data[6];
-				    int counter = 0;
-				    for (int i = 7; i >= 2; i--) 
-				    {
-				        uint8_t byte_temp6 = (uint8_t) (((packet_data[i] * 0x0802LU & 0x22110LU) | (packet_data[i] * 0x8020LU & 0x88440LU)) * 0x10101LU >> 16);
-					//result = byte_temp6;
-					mac_data[counter] = byte_temp6;
-					counter = counter + 1;
-					
-				    }
-				    
-
-				    packet_detected = true;
-				} */
-
 				if (packet_addr_l==0x8E89BED6)
+				//if (packet_crc==calced_crc)
 				{
 				    uint8_t mac_data[6];
 				    int counter = 0;
@@ -364,9 +304,6 @@ void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
 			            data_message.value = 'B';
 				    shared_memory.application_queue.push(data_message);
 
-
-
-
 				    packet_detected = true;
 				}
 				else
@@ -378,23 +315,6 @@ void BTLERxProcessor::execute(const buffer_c8_t& buffer) {
 				skipSamples=20;
 			}
 		}
-		/*sample_bits <<= 1;
-		sample_bits = (current_sample) ? 1 : 0;*/
-		
-		
-/*
-		phase += 1;
-
-		if (phase >= 1000) 
-		{
-			phase = 0;
-			//word_bits <<= 1;
-			//word_bits |= (sample_bits & 1);
-					
-			data_message.is_data = true;
-			data_message.value = channel_number;
-			shared_memory.application_queue.push(data_message);	
-		}*/
 	}
 }
 
@@ -408,13 +328,6 @@ void BTLERxProcessor::configure(const BTLERxConfigureMessage& message) {
 	decim_1.configure(taps_200k_wfm_decim_1.taps, 131072);
 	demod.configure(audio_fs, 5000);
 
-	audio_output.configure(audio_24k_hpf_300hz_config, audio_24k_deemph_300_6_config, 0);
-	
-	phase = 0;
-
-	triggered = false;
-	state = WAIT_START;
-	
 	configured = true;
 }
 

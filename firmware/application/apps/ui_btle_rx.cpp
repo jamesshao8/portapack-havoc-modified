@@ -100,8 +100,8 @@ BTLERxView::BTLERxView(NavigationView& nav) {
 	audio::set_rate(audio::Rate::Hz_24000);
 	audio::output::start();
 	
-	receiver_model.set_sampling_rate(8000000);
-	receiver_model.set_baseband_bandwidth(8000000);
+	receiver_model.set_sampling_rate(4000000);
+	receiver_model.set_baseband_bandwidth(4000000);
 	receiver_model.set_modulation(ReceiverModel::Mode::WidebandFMAudio);
 	receiver_model.enable();
 }

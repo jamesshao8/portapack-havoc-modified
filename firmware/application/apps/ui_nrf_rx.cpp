@@ -21,7 +21,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "ui_btle_rx.hpp"
+#include "ui_nrf_rx.hpp"
 #include "ui_modemsetup.hpp"
 
 #include "modems.hpp"
@@ -36,16 +36,16 @@ using namespace modems;
 
 namespace ui {
 
-void BTLERxView::focus() {
+void NRFRxView::focus() {
 	field_frequency.focus();
 }
 
-void BTLERxView::update_freq(rf::Frequency f) {
+void NRFRxView::update_freq(rf::Frequency f) {
 	receiver_model.set_tuning_frequency(f);
 }
 
-BTLERxView::BTLERxView(NavigationView& nav) {
-	baseband::run_image(portapack::spi_flash::image_tag_btle_rx);
+NRFRxView::NRFRxView(NavigationView& nav) {
+	baseband::run_image(portapack::spi_flash::image_tag_nrf_rx);
 	
 	add_children({
 		&rssi,
@@ -67,7 +67,7 @@ BTLERxView::BTLERxView(NavigationView& nav) {
 	record_view.set_sampling_rate(24000);
 	
 	// Auto-configure modem for LCR RX (will be removed later)
-	update_freq(2426000000);
+	update_freq(2480000000);
 	auto def_bell202 = &modem_defs[0];
 	persistent_memory::set_modem_baudrate(def_bell202->baudrate);
 	serial_format_t serial_format;
@@ -96,7 +96,7 @@ BTLERxView::BTLERxView(NavigationView& nav) {
 	
 	
 	// Auto-configure modem for LCR RX (will be removed later)
-	baseband::set_btle(persistent_memory::modem_baudrate(), 8, 0, false);
+	baseband::set_nrf(persistent_memory::modem_baudrate(), 8, 0, false);
 	
 	audio::set_rate(audio::Rate::Hz_24000);
 	audio::output::start();
@@ -107,7 +107,7 @@ BTLERxView::BTLERxView(NavigationView& nav) {
 	receiver_model.enable();
 }
 
-void BTLERxView::on_data(uint32_t value, bool is_data) {
+void NRFRxView::on_data(uint32_t value, bool is_data) {
 	//std::string str_console = "\x1B";
 	std::string str_console = "";
 	if (is_data) {
@@ -127,7 +127,7 @@ void BTLERxView::on_data(uint32_t value, bool is_data) {
 		//str_console += (char)'A';
 		//str_console += (char)value;
 		//str_console += "[" + to_string_hex(value, 2) + "]";	
-		str_console += ":" + to_string_hex(value, 2) ;	
+		str_console += " " + to_string_hex(value, 2) ;	
 		console.write(str_console);
 		
 		
@@ -144,14 +144,19 @@ void BTLERxView::on_data(uint32_t value, bool is_data) {
 		// Baudrate estimation
 		//text_debug.set("~" + to_string_dec_uint(value)); 
 		if (value == 'A')
-		{console.write("mac");}
+		{console.write("addr:");}
 		else if (value == 'B')
-		{console.writeln("");}
+		{console.write(" data:");}
+		else if (value == 'C')
+		{
+			console.writeln("");
+			console.writeln("");
+		}
 		//console.writeln("");
 	}
 }
 
-BTLERxView::~BTLERxView() {
+NRFRxView::~NRFRxView() {
 	audio::output::stop();
 	receiver_model.disable();
 	baseband::shutdown();

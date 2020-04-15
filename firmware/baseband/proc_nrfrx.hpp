@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __PROC_BTLERX_H__
-#define __PROC_BTLERX_H__
+#ifndef __PROC_NRFRX_H__
+#define __PROC_NRFRX_H__
 
 #include "baseband_processor.hpp"
 #include "baseband_thread.hpp"
@@ -36,7 +36,7 @@
 #include "fifo.hpp"
 #include "message.hpp"
 
-class BTLERxProcessor : public BasebandProcessor {
+class NRFRxProcessor : public BasebandProcessor {
 public:
 	void execute(const buffer_c8_t& buffer) override;
 
@@ -80,6 +80,7 @@ private:
 	dsp::demodulate::FM demod { };
 	int rb_head {-1};
 	int32_t g_threshold {0};  
+	//uint8_t g_srate {8}; 
 	uint8_t channel_number {38};
 	int skipSamples {1000};
 	int RB_SIZE {1000};
@@ -87,9 +88,9 @@ private:
 	bool configured { false };
 
 	
-	void configure(const BTLERxConfigureMessage& message);
+	void configure(const NRFRxConfigureMessage& message);
 	
 	AFSKDataMessage data_message { false, 0 };
 };
 
-#endif/*__PROC_BTLERX_H__*/
+#endif/*__PROC_NRFRX_H__*/

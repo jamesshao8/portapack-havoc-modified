@@ -69,6 +69,7 @@ void set_afsk_data(const uint32_t afsk_samples_per_bit, const uint32_t afsk_phas
 void kill_afsk();
 void set_afsk(const uint32_t baudrate, const uint32_t word_length, const uint32_t trigger_value, const bool trigger_word);
 void set_btle(const uint32_t baudrate, const uint32_t word_length, const uint32_t trigger_value, const bool trigger_word);
+void set_nrf(const uint32_t baudrate, const uint32_t word_length, const uint32_t trigger_value, const bool trigger_word);
 void set_ook_data(const uint32_t stream_length, const uint32_t samples_per_bit, const uint8_t repeat,
 					const uint32_t pause_symbols);
 void set_fsk_data(const uint32_t stream_length, const uint32_t samples_per_bit, const uint32_t shift,

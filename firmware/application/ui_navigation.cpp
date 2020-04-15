@@ -35,6 +35,7 @@
 #include "ui_adsb_tx.hpp"
 #include "ui_afsk_rx.hpp"
 #include "ui_btle_rx.hpp"
+#include "ui_nrf_rx.hpp"
 #include "ui_aprs_tx.hpp"
 #include "ui_bht_tx.hpp"
 #include "ui_coasterp.hpp"
@@ -351,6 +352,7 @@ ReceiversMenuView::ReceiversMenuView(NavigationView& nav) {
 		{ "AIS Boats",	ui::Color::green(),		&bitmap_icon_ais,		[&nav](){ nav.push<AISAppView>(); } },
 		{ "AFSK", 		ui::Color::yellow(),	&bitmap_icon_receivers,	[&nav](){ nav.push<AFSKRxView>(); } },
 		{ "BTLE",		ui::Color::white(),	&bitmap_btle, [&nav](){ nav.push<BTLERxView>(); } },
+		{ "NRF", 		ui::Color::white(),	&bitmap_nrf,		[&nav](){ nav.push<NRFRxView>(); } }, 
 		{ "Audio", 		ui::Color::green(),		&bitmap_icon_speaker,	[&nav](){ nav.push<AnalogAudioView>(); } },
                 { "TV",                 ui::Color::white(),          &bitmap_icon_sstv,      [&nav](){ nav.push<AnalogTvView>(); } },
 		{ "ERT Meter", 	ui::Color::green(), 	&bitmap_icon_ert,		[&nav](){ nav.push<ERTAppView>(); } },
@@ -359,7 +361,6 @@ ReceiversMenuView::ReceiversMenuView(NavigationView& nav) {
 		{ "TPMS Cars", 	ui::Color::green(),		&bitmap_icon_tpms,		[&nav](){ nav.push<TPMSAppView>(); } },
 		{ "APRS", 		ui::Color::dark_grey(),	&bitmap_icon_aprs,		[&nav](){ nav.push<NotImplementedView>(); } },
 		{ "DMR", 		ui::Color::dark_grey(),	&bitmap_icon_dmr,		[&nav](){ nav.push<NotImplementedView>(); } },
-		{ "SIGFOX", 	ui::Color::dark_grey(),	&bitmap_icon_fox,		[&nav](){ nav.push<NotImplementedView>(); } }, // SIGFRXView
 		{ "LoRa", 		ui::Color::dark_grey(),	&bitmap_icon_lora,		[&nav](){ nav.push<NotImplementedView>(); } },
 		{ "SSTV", 		ui::Color::dark_grey(), &bitmap_icon_sstv,		[&nav](){ nav.push<NotImplementedView>(); } },
 		{ "TETRA", 		ui::Color::dark_grey(),	&bitmap_icon_tetra,		[&nav](){ nav.push<NotImplementedView>(); } },
@@ -559,7 +560,7 @@ ModalMessageView::ModalMessageView(
 		add_child(&button_ok);
 		
 		button_ok.on_select = [&nav](Button&){
-			nav.pop();
+			nav.pop();	
 		};
 	} else if (type == YESNO) {
 		add_children({

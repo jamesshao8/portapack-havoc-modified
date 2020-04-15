@@ -320,6 +320,13 @@ set(MODE_CPPSRC
 )
 DeclareTargets(PBTR btlerx)
 
+### NRF RX
+
+set(MODE_CPPSRC
+	proc_nrfrx.cpp
+)
+DeclareTargets(PNRR nrfrx)
+
 ### AIS
 
 set(MODE_CPPSRC

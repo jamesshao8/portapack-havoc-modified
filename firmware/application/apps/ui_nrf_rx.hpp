@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __UI_BTLE_RX_H__
-#define __UI_BTLE_RX_H__
+#ifndef __UI_NRF_RX_H__
+#define __UI_NRF_RX_H__
 
 #include "ui.hpp"
 #include "ui_navigation.hpp"
@@ -33,14 +33,14 @@
 
 namespace ui {
 
-class BTLERxView : public View {
+class NRFRxView : public View {
 public:
-	BTLERxView(NavigationView& nav);
-	~BTLERxView();
+	NRFRxView(NavigationView& nav);
+	~NRFRxView();
 
 	void focus() override;
 
-	std::string title() const override { return "BTLE RX"; };
+	std::string title() const override { return "NRF RX"; };
 	
 private:
 	void on_data(uint32_t value, bool is_data);
@@ -104,4 +104,4 @@ private:
 
 } /* namespace ui */
 
-#endif/*__UI_BTLE_RX_H__*/
+#endif/*__UI_NRF_RX_H__*/

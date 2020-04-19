@@ -72,7 +72,7 @@ private:
 		int32_t delay;
 	} credits_t;
 	
-	const credits_t credits[25] = {
+	const credits_t credits[26] = {
 		//           012345678901234567890123456789
 		{ 60,		"PortaPack|HAVOC",					0 },
 		{ 4 * 8,	    "Version " VERSION_STRING,		16 },
@@ -90,6 +90,7 @@ private:
 		{ 0 * 8,	"TouchTunes infos  Notpike",		16 },
 		{ 4 * 8,	    "Subaru infos  Tom",			0 },
 		{ 18 * 8,	                  "Wimmenhove",		24 },
+		{ 0 * 8,	"GPS, TV, BTLE, NRF, Shao",		16},
 		{ 6 * 8,	      "Thanks & donators",			16 },
 		{ 1 * 8,	 "Rainer Matla     Keld Norman",	0 },
 		{ 1 * 8,	 " Giorgio C.         DC1RDB",		0 },

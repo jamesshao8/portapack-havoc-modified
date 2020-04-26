@@ -11,3 +11,5 @@ I improved little bit for btle.
 Now it can pass crc, however the mac passed crc is wrong. 
 
 I added nrf24l01 demodulation, tested with crazyradio pa. Only 250KPS mode is supported for now.
+
+I improved pocsag tramitter and receiver. Now they can be switched to Positive or Negative phase.

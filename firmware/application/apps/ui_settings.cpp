@@ -244,7 +244,8 @@ SetUIView::SetUIView(NavigationView& nav) {
 		&button_ok
 	});
 	
-	checkbox_showsplash.set_value(persistent_memory::config_splash());
+	//checkbox_showsplash.set_value(persistent_memory::config_splash());
+	checkbox_showsplash.set_value(true);
 	checkbox_login.set_value(persistent_memory::config_login());
 	
 	uint32_t backlight_timer = persistent_memory::config_backlight_timer();

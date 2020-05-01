@@ -46,6 +46,10 @@ public:
 	virtual volume_range_t headphone_gain_range() const = 0;
 	virtual void set_headphone_volume(const volume_t volume) = 0;
 
+	virtual void speaker_enable() = 0;
+	virtual void speaker_disable() = 0;
+	
+
 	virtual void microphone_enable() = 0;
 	virtual void microphone_disable() = 0;
 
@@ -78,6 +82,15 @@ volume_range_t volume_range();
 void set_volume(const volume_t volume);
 
 } /* namespace headphone */
+
+
+namespace speaker {
+
+volume_range_t volume_range();
+
+void set_volume(const volume_t volume);
+
+} /* namespace speaker */
 
 namespace debug {
 

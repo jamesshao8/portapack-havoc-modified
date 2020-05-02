@@ -106,6 +106,7 @@ SystemStatusView::SystemStatusView(
 		&backdrop,
 		&button_back,
 		&title,
+		&button_speaker,
 		&button_stealth,
 		//&button_textentry,
 		&button_camera,
@@ -132,7 +133,11 @@ SystemStatusView::SystemStatusView(
 		if (this->on_back)
 			this->on_back();
 	};
-	
+
+	button_speaker.on_select = [this](ImageButton&) {
+		this->on_speaker();
+	};
+
 	button_stealth.on_select = [this](ImageButton&) {
 		this->on_stealth();
 	};
@@ -186,6 +191,20 @@ void SystemStatusView::set_title(const std::string new_value) {
 	} else {
 		title.set(new_value);
 	}
+}
+
+void SystemStatusView::on_speaker() {
+	if (!portapack::speaker_mode) 
+	{
+		portapack::set_speaker_mode(true);
+		button_speaker.set_foreground(Color::green());
+	}
+	else
+	{
+		portapack::set_speaker_mode(false);
+		button_speaker.set_foreground(Color::light_grey());
+	}
+	
 }
 
 void SystemStatusView::on_stealth() {

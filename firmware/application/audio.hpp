@@ -66,6 +66,9 @@ void stop();
 void mute();
 void unmute();
 
+void speaker_mute();
+void speaker_unmute();
+
 } /* namespace output */
 
 namespace input {

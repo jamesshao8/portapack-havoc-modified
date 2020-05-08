@@ -190,7 +190,7 @@ private:
 	void update_modulation(const ReceiverModel::Mode modulation);
 	
 	//void squelched();
-	void handle_coded_squelch(const uint32_t value);
+	void handle_coded_squelch(const bool enabled, const uint32_t value);
 	
 	/*MessageHandlerRegistration message_handler_squelch_signal {
 		Message::ID::RequestSignal,
@@ -204,7 +204,7 @@ private:
 		Message::ID::CodedSquelch,
 		[this](const Message* const p) {
 			const auto message = *reinterpret_cast<const CodedSquelchMessage*>(p);
-			this->handle_coded_squelch(message.value);
+			this->handle_coded_squelch(message.enabled, message.value);
 		}
 	};
 };

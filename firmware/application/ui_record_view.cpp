@@ -36,7 +36,7 @@ using namespace portapack;
 
 namespace ui {
 
-/*void RecordView::toggle_pitch_rssi() {
+void RecordView::toggle_pitch_rssi() {
 	pitch_rssi_enabled = !pitch_rssi_enabled;
 	
 	// Send to RSSI widget
@@ -51,7 +51,7 @@ namespace ui {
 	} else {
 		button_pitch_rssi.set_foreground(Color::green());
 	}
-}*/
+}
 
 RecordView::RecordView(
 	const Rect parent_rect,
@@ -67,7 +67,7 @@ RecordView::RecordView(
 {
 	add_children({
 		&rect_background,
-		//&button_pitch_rssi,
+		&button_pitch_rssi,
 		&button_record,
 		&text_record_filename,
 		&text_record_dropped,
@@ -76,9 +76,9 @@ RecordView::RecordView(
 	
 	rect_background.set_parent_rect({ { 0, 0 }, size() });
 	
-	/*button_pitch_rssi.on_select = [this](ImageButton&) {
+	button_pitch_rssi.on_select = [this](ImageButton&) {
 		this->toggle_pitch_rssi();
-	};*/
+	};
 
 	button_record.on_select = [this](ImageButton&) {
 		this->toggle();
@@ -239,9 +239,9 @@ void RecordView::update_status_display() {
 		text_record_dropped.set(s);
 	}
 	
-	/*if (pitch_rssi_enabled) {
+	if (pitch_rssi_enabled) {
 		button_pitch_rssi.invert_colors();
-	}*/
+	}
 
 	if( sampling_rate ) {
 		const auto space_info = std::filesystem::space(u"");

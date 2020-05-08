@@ -399,12 +399,14 @@ public:
 class CodedSquelchMessage : public Message {
 public:
 	constexpr CodedSquelchMessage(
+		const bool enabled,
 		const uint32_t value
 	) : Message { ID::CodedSquelch },
+		enabled { enabled },
 		value { value }
 	{
 	}
-	
+	bool enabled;
 	uint32_t value;
 };
 

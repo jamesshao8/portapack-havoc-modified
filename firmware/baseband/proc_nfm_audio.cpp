@@ -79,6 +79,7 @@ void NarrowbandFMAudio::execute(const buffer_c8_t& buffer) {
 			}
 			
 			if (z_count >= 30) {
+				ctcss_message.enabled = true;
 				ctcss_message.value = (100 * 12000 / 2 * z_count) / z_acc;
 				shared_memory.application_queue.push(ctcss_message);
 				z_count = 0;
@@ -93,6 +94,18 @@ void NarrowbandFMAudio::execute(const buffer_c8_t& buffer) {
 		}
 		
 		audio_output.write(tone_buffer);
+
+		if (z_count >= 30) 
+		{
+			ctcss_message.enabled = false;
+			ctcss_message.value =  rssi_value;
+			shared_memory.application_queue.push(ctcss_message);
+			z_count = 0;
+				
+		}
+		z_count++;
+
+		
 		
 		/*new_state = audio_output.is_squelched();
 		
@@ -157,6 +170,7 @@ void NarrowbandFMAudio::configure(const NBFMConfigureMessage& message) {
 void NarrowbandFMAudio::pitch_rssi_config(const PitchRSSIConfigureMessage& message) {
 	pitch_rssi_enabled = message.enabled;
 	tone_delta = (message.rssi + 1000) * ((1ULL << 32) / 24000);
+	rssi_value = message.rssi;
 }
 
 void NarrowbandFMAudio::capture_config(const CaptureConfigMessage& message) {

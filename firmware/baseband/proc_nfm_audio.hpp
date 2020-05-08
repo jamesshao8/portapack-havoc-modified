@@ -88,6 +88,7 @@ private:
 	
 	uint32_t tone_phase { 0 };
 	uint32_t tone_delta { 0 };
+	uint32_t rssi_value { 0 };
 	bool pitch_rssi_enabled { false };
 	
 	float cur_sample { }, prev_sample { };
@@ -102,7 +103,7 @@ private:
 	void capture_config(const CaptureConfigMessage& message);
 	
 	//RequestSignalMessage sig_message { RequestSignalMessage::Signal::Squelched };
-	CodedSquelchMessage ctcss_message { 0 };
+	CodedSquelchMessage ctcss_message {false, 0 };
 };
 
 #endif/*__PROC_NFM_AUDIO_H__*/

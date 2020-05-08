@@ -344,25 +344,32 @@ void AnalogAudioView::update_modulation(const ReceiverModel::Mode modulation) {
 	if (exit_on_squelch) nav_.pop();
 }*/
 
-void AnalogAudioView::handle_coded_squelch(const uint32_t value) {
-	float diff, min_diff = value;
-	size_t min_idx { 0 };
-	size_t c;
+void AnalogAudioView::handle_coded_squelch(const bool enabled, const uint32_t value) {
+	if (enabled == true)
+	{
+		float diff, min_diff = value;
+		size_t min_idx { 0 };
+		size_t c;
 	
-	// Find nearest match
-	for (c = 0; c < tone_keys.size(); c++) {
-		diff = abs(((float)value / 100.0) - tone_keys[c].second);
-		if (diff < min_diff) {
-			min_idx = c;
-			min_diff = diff;
+		// Find nearest match
+		for (c = 0; c < tone_keys.size(); c++) {
+			diff = abs(((float)value / 100.0) - tone_keys[c].second);
+			if (diff < min_diff) {
+				min_idx = c;
+				min_diff = diff;
+			}
 		}
-	}
 	
-	// Arbitrary confidence threshold
-	if (min_diff < 40)
-		text_ctcss.set("CTCSS " + tone_keys[min_idx].first);
-	else
-		text_ctcss.set("???");
+		// Arbitrary confidence threshold
+		if (min_diff < 40)
+			text_ctcss.set("CTCSS " + tone_keys[min_idx].first);
+		else
+			text_ctcss.set("???");
+	}
+	else if (enabled == false)
+	{
+		text_ctcss.set("RSSI " + to_string_dec_uint(value, 4 ));
+	}
 }
 
 } /* namespace ui */

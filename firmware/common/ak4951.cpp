@@ -298,6 +298,48 @@ void AK4951::microphone_disable() {
 	update(Register::ALCModeControl1);
 }
 
+void AK4951::microphone_internal_enable() {
+	const uint_fast8_t mgain = 0b0111;
+	map.r.signal_select_1.MGAIN20 = mgain & 7;
+	map.r.signal_select_1.PMMP = 1;
+	map.r.signal_select_1.MPSEL = 0;	// MPWR1 pin
+	map.r.signal_select_1.MGAIN3 = (mgain >> 3) & 1;
+	update(Register::SignalSelect1);
+
+	map.r.signal_select_2.INL = 0b00;	// Lch input signal = LIN1
+	map.r.signal_select_2.INR = 0b00;	// Rch input signal = RIN1
+	map.r.signal_select_2.MICL = 0;		// MPWR = 2.4V
+	update(Register::SignalSelect2);
+
+	map.r.digital_filter_select_1.HPFAD = 1;	// HPF1 (after ADC) = on
+	map.r.digital_filter_select_1.HPFC = 0b11;	// 2336.8 Hz @ fs=48k
+	update(Register::DigitalFilterSelect1);
+
+	map.r.digital_filter_mode.PFSDO = 0;	// ADC (+ 1st order HPF) Output
+	map.r.digital_filter_mode.ADCPF = 1;	// ADC Output (default)
+	update(Register::DigitalFilterMode);
+
+	// ... Set coefficients ...
+
+	map.r.power_management_1.PMADL = 1;		// ADC Lch = Lch input signal
+	map.r.power_management_1.PMADR = 1;		// ADC Rch = Rch input signal
+	map.r.power_management_1.PMPFIL = 0;	// Programmable filter unused, routed around.
+	update(Register::PowerManagement1);
+
+	// 1059/fs, 22ms @ 48kHz
+	chThdSleepMilliseconds(22);
+}
+
+void AK4951::microphone_internal_disable() {
+	map.r.power_management_1.PMADL = 0;
+	map.r.power_management_1.PMADR = 0;
+	map.r.power_management_1.PMPFIL = 0;
+	update(Register::PowerManagement1);
+
+	map.r.alc_mode_control_1.ALC = 0;
+	update(Register::ALCModeControl1);
+}
+
 reg_t AK4951::read(const address_t reg_address) {
 	const std::array<uint8_t, 1> tx { reg_address };
 	std::array<uint8_t, 1> rx { 0x00 };

@@ -352,6 +352,14 @@ public:
 		// TODO: Implement
 	}
 
+	void microphone_internal_enable() override {
+		// TODO: Implement
+	}
+
+	void microphone_internal_disable() override {
+		// TODO: Implement
+	}
+
 	// void microphone_mute(const bool mute) {
 	// 	map.r.analog_audio_path_control.mutemic = (mute ? 0 : 1);
 	// 	write(Register::AnalogAudioPathControl);

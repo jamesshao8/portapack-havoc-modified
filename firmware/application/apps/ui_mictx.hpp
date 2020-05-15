@@ -54,7 +54,7 @@ public:
 			return false;
 	};
 	
-	std::string title() const override { return "Microphone TX"; };
+	std::string title() const override { return "Mic TX"; };
 
 private:
 	static constexpr uint32_t sampling_rate = 1536000U;

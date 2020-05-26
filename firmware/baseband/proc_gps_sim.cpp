@@ -85,7 +85,7 @@ void ReplayProcessor::execute(const buffer_c8_t& buffer) {
 		spectrum_samples -= spectrum_interval_samples;
 		//channel_spectrum.feed(iq_buffer, channel_filter_pass_f, channel_filter_stop_f);
 		
-		txprogress_message.progress = bytes_read;	// Inform UI about progress
+		txprogress_message.progress = bytes_read / 1024;	// Inform UI about progress
 		txprogress_message.done = false;
 		shared_memory.application_queue.push(txprogress_message);
 	}

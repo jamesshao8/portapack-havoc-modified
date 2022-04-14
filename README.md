@@ -12,6 +12,10 @@ Features above are disclosed in this repo.
 * Built in battery and level indicator
 * Built in barometer
 * Built in compass
+
+Features above are not disclosed yet.
+
+* Screenshots:
 ![image](https://user-images.githubusercontent.com/17997195/163305854-678083fd-72fe-4687-8f42-133a2d790bee.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/163305857-1dcc1f41-17e2-4243-978b-0eece7e4295a.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/163305865-d89d2a28-f1ce-4a96-b9f9-e79d228027ef.PNG)
@@ -19,4 +23,3 @@ Features above are disclosed in this repo.
 ![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/163305888-c4637333-1f73-4ca5-a11e-13ea9b683278.PNG)
 
-Features above are not disclosed yet.

@@ -1,15 +1,22 @@
 # portapack-havoc-modified
-I added gps simulator and analog tv demodulator (mainly PAL).
-I also implemented Bluetooth receiver.
-The bluetooth receiver can show you mac address of BLE devices around you.
-However, the result isn't always correct.
-Because I have only filtered with preamble and address, without crc.
-If I use crc, no result will be shown, so I have to bypass crc test.
-I am thinking some radio parameter can be improved to reduce the noise, so that more result can pass crc.
+gps simulator / analog tv demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved pocsag tx and rx (P/N phase).
 
-I improved little bit for btle.
-Now it can pass crc, however the mac passed crc is wrong. 
+Features above are disclosed in this repo.
 
-I added nrf24l01 demodulation, tested with crazyradio pa. Only 250KPS mode is supported for now.
+-------------------------------------------------------------------------------------------------------
+### Difference between H3 and H2/H2+
 
-I improved pocsag tramitter and receiver. Now they can be switched to Positive or Negative phase.
+* Special Firmware supporting SSTV and NOAA receiving
+* Built in microphone
+* Built in GPS receiver
+* Built in battery and level indicator
+* Built in barometer
+* Built in compass
+![image](https://user-images.githubusercontent.com/17997195/163305854-678083fd-72fe-4687-8f42-133a2d790bee.PNG)
+![image](https://user-images.githubusercontent.com/17997195/163305857-1dcc1f41-17e2-4243-978b-0eece7e4295a.PNG)
+![image](https://user-images.githubusercontent.com/17997195/163305865-d89d2a28-f1ce-4a96-b9f9-e79d228027ef.PNG)
+![image](https://user-images.githubusercontent.com/17997195/163305872-b2e57b8c-58f8-4c18-816f-b88047bbbf26.PNG)
+![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
+![image](https://user-images.githubusercontent.com/17997195/163305888-c4637333-1f73-4ca5-a11e-13ea9b683278.PNG)
+
+Features above are not disclosed yet.

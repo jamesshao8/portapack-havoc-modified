@@ -6,7 +6,7 @@ Features above are disclosed in this repo.
 -------------------------------------------------------------------------------------------------------
 ### Difference between H3 and H2/H2+
 
-* Special Firmware supporting SSTV and NOAA receiving
+* Special Firmware supporting SSTV and NOAA receiving, GPS time sync
 * Built in microphone
 * Built in GPS receiver
 * Built in battery and level indicator

@@ -6,7 +6,7 @@ Features above are disclosed in this repo.
 -------------------------------------------------------------------------------------------------------
 ### Difference between H3 and H2/H2+
 
-* Special Firmware supporting SSTV(robot8, martin m2, scottie s2, pd-120) and NOAA receiving, GPS time sync
+* Special Firmware supporting SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) and NOAA receiving, GPS time sync
 * Built in microphone
 * Built in GPS receiver
 * Built in battery and level indicator

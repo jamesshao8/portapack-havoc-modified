@@ -8,6 +8,7 @@ Features above are disclosed in this repo.
 
 * Special Firmware supporting SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) and NOAA receiving, GPS time sync
 * Improved Analog TV receiver (with AGC and line sync)
+* Improved Signal Generator and Soundboard (added AM support)
 * Built in microphone
 * Built in GPS receiver
 * Built in battery and level indicator

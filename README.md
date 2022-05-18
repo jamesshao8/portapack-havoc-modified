@@ -1,9 +1,19 @@
 # portapack-havoc-modified
-gps simulator / analog tv demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved pocsag tx and rx (P/N phase).
+GPS simulator / Analog tv demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved pocsag tx and rx (P/N phase).
 
-Features above are disclosed in this repo.
+Features above are developed and published in this repo, later adopted by Mayhem.
 
 -------------------------------------------------------------------------------------------------------
+
+# Compatibilty clarification
+This open source portapack-havoc-modified is compatible with H1 H2 H3, which is same as Mayhem.
+However latest feature is only compatible with H3 and H1 (with add-on board).
+
+![image](https://user-images.githubusercontent.com/17997195/169004591-0d7c3076-bc70-4e40-8def-3af58b924d3c.jpg)
+![image](https://user-images.githubusercontent.com/17997195/169004605-0e937349-001e-4952-83df-4f927e37dde7.jpg)
+
+----------------------------
+
 ### Difference between H3 and H2/H2+
 
 * Special Firmware supporting SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) and NOAA receiving, GPS time sync
@@ -30,5 +40,4 @@ Features above are not disclosed yet.
 ![image](https://user-images.githubusercontent.com/17997195/168185346-ae9834f1-2855-4309-b4d1-4f6f591df27f.png)
 ![image](https://user-images.githubusercontent.com/17997195/168185356-ec5dc3c4-299c-4306-953a-fea7909659e7.png)
 ![image](https://user-images.githubusercontent.com/17997195/168185360-7bcf7c4d-2674-4464-b40b-f63c32115f8a.png)
-
 

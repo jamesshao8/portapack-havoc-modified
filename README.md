@@ -4,18 +4,22 @@
 
 GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
 
-**Features above are developed and published from this repo, later taken by Mayhem.**
+**Features above are developed and published from this repository, later taken by Mayhem.**
 
 -------------------------------------------------------------------------------------------------------
 
 ### Compatibilty clarification
-This open source portapack-havoc-modified is compatible with H1 H2 H3, which is same as Mayhem.
+Does H3 compatible with Mayhem?
+**Yes** 
 
-But Latest feature is only compatible with H3 and H1 (with add-on board).
+Does latest features compatible with H1 or H2?
+**No** for H2 (close source, **Do not buy or support**)
+**Plausible** for H1 with my add-on board
 
 <img width="434" alt="Screenshot 2022-05-18 173305" src="https://user-images.githubusercontent.com/17997195/169008646-e3950dbc-f9f5-4abf-bf33-16004d7b0dcc.png">
 
-**Most useful features in Mayhem are included in my lastest firmware, however features below are only available in my firmware on H3.**
+Latest firmware for H3?
+**Most useful features of portapack are chosen and included in my lastest firmware, however features below are only available in my firmware on H3.**
 
 -------------------------------------------------------------------------------------------------------
 
@@ -37,8 +41,11 @@ But Latest feature is only compatible with H3 and H1 (with add-on board).
 ![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/167978159-77b60f81-dd0a-4f12-9623-d687d8b48c24.PNG)
 
-
 ![image](https://user-images.githubusercontent.com/17997195/168185346-ae9834f1-2855-4309-b4d1-4f6f591df27f.png)
 ![image](https://user-images.githubusercontent.com/17997195/168185356-ec5dc3c4-299c-4306-953a-fea7909659e7.png)
 ![image](https://user-images.githubusercontent.com/17997195/168185360-7bcf7c4d-2674-4464-b40b-f63c32115f8a.png)
+
+Analog TV signal source could be hacktv, with example command below:
+ffmpeg -i input.mp4 -vf scale=832:576 output.mp4
+hacktv -f 434000000 -m i -g 47 output.mp4
 

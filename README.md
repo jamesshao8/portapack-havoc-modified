@@ -23,12 +23,13 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 **Plausible** for H1 with my add-on board
 
 
+-------------------------------------------------------------------------------------------------------
 
 * Latest firmware for H3?
 
 **Most useful features of portapack are chosen and included in my lastest firmware, however features below are only available in my firmware on H3.**
 
--------------------------------------------------------------------------------------------------------
+
 
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 

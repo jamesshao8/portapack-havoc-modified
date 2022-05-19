@@ -1,6 +1,6 @@
 # portapack-havoc-modified
 
-<img width="331" alt="Screenshot 2022-05-19 103253" src="https://user-images.githubusercontent.com/17997195/169192013-493f29fb-e11a-48dd-9c3b-5a8f83d17eff.png">
+<img width="500" alt="Screenshot 2022-05-19 103253" src="https://user-images.githubusercontent.com/17997195/169192013-493f29fb-e11a-48dd-9c3b-5a8f83d17eff.png">
 
 GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
 

@@ -1,16 +1,17 @@
 # portapack-havoc-modified
 GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
 
-Features above are developed and published in this repo, later adopted by Mayhem.
-
+Features above are developed and published from this repo, later taken by Mayhem.
 -------------------------------------------------------------------------------------------------------
 
 ### Compatibilty clarification
 This open source portapack-havoc-modified is compatible with H1 H2 H3, which is same as Mayhem.
-However latest feature is only compatible with H3 and H1 (with add-on board).
+
+But Latest feature is only compatible with H3 and H1 (with add-on board).
 
 <img width="434" alt="Screenshot 2022-05-18 173305" src="https://user-images.githubusercontent.com/17997195/169008646-e3950dbc-f9f5-4abf-bf33-16004d7b0dcc.png">
 
+Most useful feature in Mayhem is included in my firmware, however features below are only available in my firmware on H3.
 -------------------------------------------------------------------------------------------------------
 
 ### Difference between H3 and H2/H2+

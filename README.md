@@ -23,6 +23,7 @@ Does latest features compatible with H1 or H2?
 **Plausible** for H1 with my add-on board
 
 
+
 Latest firmware for H3?
 
 **Most useful features of portapack are chosen and included in my lastest firmware, however features below are only available in my firmware on H3.**
@@ -51,7 +52,10 @@ Latest firmware for H3?
 ![image](https://user-images.githubusercontent.com/17997195/168185356-ec5dc3c4-299c-4306-953a-fea7909659e7.png)
 ![image](https://user-images.githubusercontent.com/17997195/168185360-7bcf7c4d-2674-4464-b40b-f63c32115f8a.png)
 
+
 Analog TV signal source could be hacktv, with example command below:
+
 ffmpeg -i input.mp4 -vf scale=832:576 output.mp4
+
 hacktv -f 434000000 -m i -g 47 output.mp4
 

@@ -15,7 +15,7 @@ But Latest feature is only compatible with H3 and H1 (with add-on board).
 
 <img width="434" alt="Screenshot 2022-05-18 173305" src="https://user-images.githubusercontent.com/17997195/169008646-e3950dbc-f9f5-4abf-bf33-16004d7b0dcc.png">
 
-**Most useful features in Mayhem are included in lastest my firmware, however features below are only available in my firmware on H3.**
+**Most useful features in Mayhem are included in my lastest firmware, however features below are only available in my firmware on H3.**
 
 -------------------------------------------------------------------------------------------------------
 

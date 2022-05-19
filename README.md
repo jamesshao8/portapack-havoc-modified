@@ -19,19 +19,15 @@ But Latest feature is only compatible with H3 and H1 (with add-on board).
 
 -------------------------------------------------------------------------------------------------------
 
-### Difference between H3 and H2/H2+
-
-* Special Firmware supporting SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) and NOAA receiving, GPS time sync
+* SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
+* NOAA receiving 
 * Improved Analog TV receiver (with AGC and line sync)
 * Improved Signal Generator and Soundboard (added AM support)
 * Built in microphone
-* Built in GPS receiver
+* Built in GPS receiver for location and time sync
 * Built in battery and level indicator
 * Built in barometer
 * Built in compass
-
-Features above are not disclosed yet.
-
 
 * 
 ![image](https://user-images.githubusercontent.com/17997195/165471964-f718298b-6c43-4e9f-9c1b-8aed3bd489e5.PNG)

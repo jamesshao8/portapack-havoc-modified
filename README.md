@@ -2,9 +2,13 @@
 
 <img width="500" alt="Screenshot 2022-05-19 103253" src="https://user-images.githubusercontent.com/17997195/169192013-493f29fb-e11a-48dd-9c3b-5a8f83d17eff.png">
 
+This repository mainly focuses on hardcore DSP stuff. UI remains original HAVOC style.
+
+
 GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
 
-**Features above are developed and published from this repository, later taken by Mayhem.**
+**Features above are developed and published from this repository.**
+**Later taken by Mayhem, and modified to some other UI/font.**
 
 
 # Does H3 compatible with Mayhem?

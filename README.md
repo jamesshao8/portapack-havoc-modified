@@ -25,9 +25,11 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 -------------------------------------------------------------------------------------------------------
 
-* Latest firmware for H3?
+* Latest/Best firmware for H3?
 
-**Most useful features of portapack are chosen and included in my lastest firmware, however features below are only available in my firmware on H3.**
+**Most useful features of portapack are chosen and included in my version of firmware.** 
+
+**However, features below are only available in my firmware on H3.**
 
 
 

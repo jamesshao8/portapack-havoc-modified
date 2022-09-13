@@ -1,6 +1,6 @@
 # portapack-havoc-modified
 
-**New H3SE announced. Features 3.2" screen and original thin encoder**
+**New H3 SE announced. Features 3.2" screen and original thin encoder**
 
 <img width="500" alt="H3SE" src="https://user-images.githubusercontent.com/17997195/189246025-40bff768-c35b-47b1-94e5-53793974f7ff.jpg">
 
@@ -21,7 +21,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 **Later taken by Mayhem, and modified to some other UI/font.**
 
 
-# Does H3/H3SE compatible with Mayhem?
+# Does H3/H3 SE compatible with Mayhem?
 
 **Yes**
 
@@ -36,11 +36,11 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 
 
-# Latest/Best firmware for H3/H3SE?
+# Latest/Best firmware for H3/H3 SE?
 
 **Most useful features of portapack are chosen and included in my version of firmware.** 
 
-**However, features below are only available in my firmware on H3/H3SE.**
+**However, features below are only available in my firmware on H3/H3 SE.**
 
 
 

@@ -5,11 +5,16 @@
 <img width="500" alt="H3SE" src="https://user-images.githubusercontent.com/17997195/189246025-40bff768-c35b-47b1-94e5-53793974f7ff.jpg">
 
 **Distributors:**
+HamRadioShop:
 
 https://www.aliexpress.com/item/3256804550974838.html
 
 
 https://www.ebay.com/itm/XXX/115523402262
+
+Swiftflying:
+
+https://www.aliexpress.com/item/3256804545943517.html
 
 <img width="500" alt="Screenshot 2022-05-19 103253" src="https://user-images.githubusercontent.com/17997195/169192013-493f29fb-e11a-48dd-9c3b-5a8f83d17eff.png">
 

@@ -68,9 +68,8 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/167978159-77b60f81-dd0a-4f12-9623-d687d8b48c24.PNG)
 
-![image](https://user-images.githubusercontent.com/17997195/168185346-ae9834f1-2855-4309-b4d1-4f6f591df27f.png)
-![image](https://user-images.githubusercontent.com/17997195/168185356-ec5dc3c4-299c-4306-953a-fea7909659e7.png)
-![image](https://user-images.githubusercontent.com/17997195/168185360-7bcf7c4d-2674-4464-b40b-f63c32115f8a.png)
+![image](https://user-images.githubusercontent.com/17997195/227824205-32a5c151-a567-4503-b30a-158e990677f2.png)
+![image](https://user-images.githubusercontent.com/17997195/227824211-9a57f899-0016-45df-a86a-c1be4f8e6af0.png)
 
 
 # Analog TV Testing Method:

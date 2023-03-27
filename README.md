@@ -1,8 +1,8 @@
 # portapack-havoc-modified
 
-**New H3 SE announced. Features 3.2" screen and original thin encoder**
+**New H3 Mini announced. Features 3.2" screen and original thin encoder**
 
-<img width="500" alt="H3SE" src="https://user-images.githubusercontent.com/17997195/189246025-40bff768-c35b-47b1-94e5-53793974f7ff.jpg">
+<img width="500" alt="H3SE" src="https://user-images.githubusercontent.com/17997195/227824450-1465d64b-4ca7-4d9d-bf06-1714b9f1bec1.png">
 
 **Distributors:**
 
@@ -27,7 +27,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 **Later taken by Mayhem, and modified to some other UI/font.**
 
 
-# Does H3/H3 SE compatible with Mayhem?
+# Does H3/H3 SE/H3 Mini compatible with Mayhem?
 
 **Yes**
 
@@ -42,7 +42,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 
 
-# Latest/Best firmware for H3/H3 SE?
+# Latest/Best firmware for H3/H3 SE/H3 Mini?
 
 **Most useful features of portapack are chosen and included in my version of firmware.** 
 
@@ -52,7 +52,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
-* Improved Analog TV receiver (with AGC and line sync)
+* Improved Analog TV receiver
 * Improved Signal Generator and Soundboard (added AM support)
 * Built in microphone
 * Built in GPS receiver for location and time sync

@@ -70,8 +70,9 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 
 # Drone FPV camera demod:
-![image](https://user-images.githubusercontent.com/17997195/227824783-6f22648e-23c1-4019-b965-74462b984dfe.PNG)
-![image](https://user-images.githubusercontent.com/17997195/227824802-28c1898a-e3e4-402c-9647-3fcfd8178646.PNG)
+![image](https://user-images.githubusercontent.com/17997195/228705116-61dbf227-a056-4ee2-b581-dd1ee8f0b8c7.PNG)
+![image](https://user-images.githubusercontent.com/17997195/228705123-4005127e-7c15-46e0-8177-b7eb62ae8d04.PNG)
+![image](https://user-images.githubusercontent.com/17997195/228705125-3a685909-914d-40a0-9978-49ea792514e6.PNG)
 
 
 # Analog TV Testing Method:

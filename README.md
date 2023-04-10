@@ -50,6 +50,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 
 
+* Train Detector (NEW)
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
 * Improved Analog TV receiver
@@ -68,6 +69,10 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/167978159-77b60f81-dd0a-4f12-9623-d687d8b48c24.PNG)
 
+
+# Train Detector (with multi-lanuage support):
+![image](https://user-images.githubusercontent.com/17997195/230917324-a0f4ce2d-7458-4bc8-852b-fb4989b673c0.PNG)
+![image](https://user-images.githubusercontent.com/17997195/230917329-c4b7a896-5200-46a7-8769-9e793b703615.PNG)
 
 # Drone FPV camera demod:
 ![image](https://user-images.githubusercontent.com/17997195/229970665-6354057d-4c62-4d64-bff8-f586be1e24a7.PNG)

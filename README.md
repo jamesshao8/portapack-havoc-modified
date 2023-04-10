@@ -70,7 +70,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/167978159-77b60f81-dd0a-4f12-9623-d687d8b48c24.PNG)
 
 
-# Train Detector (with multi-lanuage support):
+# Train Detector (with multi-language support):
 ![image](https://user-images.githubusercontent.com/17997195/230917324-a0f4ce2d-7458-4bc8-852b-fb4989b673c0.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/230917329-c4b7a896-5200-46a7-8769-9e793b703615.PNG)
 

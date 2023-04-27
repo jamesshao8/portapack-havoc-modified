@@ -27,13 +27,6 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 **Later taken by Mayhem, and modified to some other UI/font.**
 
 
-# Does H3/H3 SE/H3 Mini compatible with Mayhem?
-
-**Yes**
-
-
-<img width="434" alt="Screenshot 2022-05-18 173305" src="https://user-images.githubusercontent.com/17997195/169008646-e3950dbc-f9f5-4abf-bf33-16004d7b0dcc.png">
-
 # Does latest features compatible with H1 or H2?
 
 **No** for H2 (close source, **Do not buy or support**)

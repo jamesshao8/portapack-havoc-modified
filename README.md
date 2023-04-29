@@ -46,6 +46,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 * Train Detector (NEW)
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
+* Morse receiver
 * Improved Analog TV receiver
 * Improved Signal Generator and Soundboard (added AM support)
 * Built in microphone

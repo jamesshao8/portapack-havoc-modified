@@ -1,8 +1,8 @@
 # portapack-havoc-modified
 
-**New H3 Mini announced. Features 3.2" screen and original thin encoder**
+**H3 Mini 2024 version announced. Features 3.2" screen and original thin encoder**
 
-<img width="500" alt="H3SE" src="https://user-images.githubusercontent.com/17997195/227824450-1465d64b-4ca7-4d9d-bf06-1714b9f1bec1.png">
+<img width="500" alt="H3mini" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/a9f9e307-d5a8-4430-b8db-fa0a5a6ca139">
 
 **Distributors:**
 
@@ -42,7 +42,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 **However, features below are only available in my firmware on H3/H3 SE.**
 
 
-
+* Weather Fax Receiver (NEW, only for premium version)
 * Train Detector (NEW)
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
@@ -67,6 +67,11 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 # Train Detector (with multi-language support):
 ![image](https://user-images.githubusercontent.com/17997195/232236907-0c22d5fb-5f53-4e22-87b8-b61be7243df1.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/232236922-e4226acf-266a-45a7-a2aa-736e89424b52.PNG)
+
+# Weather Fax Receiver (premium only):
+![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/dff76b12-835e-4435-8af0-cb3bb40484c8
+)
+
 
 # Drone FPV camera demod:
 ![image](https://user-images.githubusercontent.com/17997195/229970665-6354057d-4c62-4d64-bff8-f586be1e24a7.PNG)

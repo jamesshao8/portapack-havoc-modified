@@ -4,6 +4,7 @@
 
 <img width="500" alt="H3mini" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/a9f9e307-d5a8-4430-b8db-fa0a5a6ca139">
 
+**Custom color case**
 <img width="500" alt="orange" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/cdb6c75d-d207-445c-8149-cb26d1c6e72b">
 
 

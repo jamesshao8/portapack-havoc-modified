@@ -3,6 +3,9 @@
 **H3 Mini 2024 version announced. Features 3.2" screen and original thin encoder**
 
 <img width="500" alt="H3mini" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/a9f9e307-d5a8-4430-b8db-fa0a5a6ca139">
+<img width="500" alt="orange" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/cdb6c75d-d207-445c-8149-cb26d1c6e72b">
+
+
 
 **Distributors:**
 
@@ -43,6 +46,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 
 * Weather Fax Receiver (NEW, only for premium version)
+* Spectrum Analyzer with G-sensor
 * Train Detector (NEW)
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
@@ -69,8 +73,11 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/232236922-e4226acf-266a-45a7-a2aa-736e89424b52.PNG)
 
 # Weather Fax Receiver (premium only):
-![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/dff76b12-835e-4435-8af0-cb3bb40484c8
-)
+![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/dff76b12-835e-4435-8af0-cb3bb40484c8)
+
+# Spectrum Analyzer (auto rotates with G-sensor):
+![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/bfb5bcf5-3896-49fd-b86c-b192cf233b89)
+
 
 
 # Drone FPV camera demod:

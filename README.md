@@ -12,8 +12,6 @@ HamRadioShop:
 https://www.aliexpress.com/item/3256804550974838.html
 
 
-https://www.ebay.com/itm/XXX/115523402262
-
 Swiftflying:
 
 https://www.aliexpress.com/item/3256804545943517.html

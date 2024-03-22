@@ -34,7 +34,7 @@ outfile.write(struct.pack('H', im.size[0]))
 outfile.write(struct.pack('H', im.size[1]))
 
 for y in range (0, im.size[1]):
-	line = ''
+	line = b''
 	for x in range (0, im.size[0]):
 		pixel_lcd = (pix[x, y][0] >> 3) << 11
 		pixel_lcd |= (pix[x, y][1] >> 2) << 5

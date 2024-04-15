@@ -72,7 +72,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/dff76b12-835e-4435-8af0-cb3bb40484c8)
 
 # NavTex Receiver (premium only):
-![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/78b592b2-6a91-435f-bace-5b69c4765f4b)
+![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/46084701-ab40-4d10-b219-87a3c04a995c)
 
 # Spectrum Analyzer (auto rotates with G-sensor):
 ![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/bfb5bcf5-3896-49fd-b86c-b192cf233b89)

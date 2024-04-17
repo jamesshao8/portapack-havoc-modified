@@ -40,7 +40,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 **However, features below are only available in my firmware on H3/H3 SE.**
 
-
+* NavTex Reciever (NEW, only for premium version)
 * Weather Fax Receiver (NEW, only for premium version)
 * Spectrum Analyzer with G-sensor
 * Train Detector (NEW)

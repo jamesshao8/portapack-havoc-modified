@@ -69,7 +69,8 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/232236922-e4226acf-266a-45a7-a2aa-736e89424b52.PNG)
 
 # Weather Fax Receiver (premium only):
-![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/dff76b12-835e-4435-8af0-cb3bb40484c8)
+![image](https://github.com/user-attachments/assets/bbf6fdd5-8dd7-4845-875a-23686861c7c0)
+![image](https://github.com/user-attachments/assets/eec45848-4a47-4568-9411-342791f070b1)
 
 # NavTex Receiver (premium only):
 ![image](https://github.com/user-attachments/assets/19cafcb2-7b35-4286-85ee-e9d85608ce2a)

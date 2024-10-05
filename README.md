@@ -70,7 +70,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 # Weather Fax Receiver (premium only):
 ![image](https://github.com/user-attachments/assets/bbf6fdd5-8dd7-4845-875a-23686861c7c0)
-![image](https://github.com/user-attachments/assets/eec45848-4a47-4568-9411-342791f070b1)
+![image](https://github.com/user-attachments/assets/b22fc392-0cd7-4e2d-84d1-4b76566c6218)
 
 # NavTex Receiver (premium only):
 ![image](https://github.com/user-attachments/assets/19cafcb2-7b35-4286-85ee-e9d85608ce2a)

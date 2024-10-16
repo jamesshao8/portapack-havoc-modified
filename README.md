@@ -59,9 +59,9 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/165471964-f718298b-6c43-4e9f-9c1b-8aed3bd489e5.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/163305857-1dcc1f41-17e2-4243-978b-0eece7e4295a.PNG)
 ![image](https://user-images.githubusercontent.com/17997195/163305865-d89d2a28-f1ce-4a96-b9f9-e79d228027ef.PNG)
-![image](https://user-images.githubusercontent.com/17997195/167530145-e39a9bff-d586-4b85-8f72-e17fb8fab285.PNG)
-![image](https://user-images.githubusercontent.com/17997195/163305881-9e3298d3-0408-45fc-9793-5a285ac2276f.PNG)
-![image](https://user-images.githubusercontent.com/17997195/167978159-77b60f81-dd0a-4f12-9623-d687d8b48c24.PNG)
+![image](https://github.com/user-attachments/assets/325bab0f-b0f8-4ab5-a7bd-3e754a09dada)
+![image](https://github.com/user-attachments/assets/af9f0fe9-46b5-48a0-aa39-4eed2a9e146b)
+![image](https://github.com/user-attachments/assets/06d7dab6-358a-4eea-9561-f4086379f83b)
 
 
 # Train Detector (with multi-language support):
@@ -69,12 +69,11 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://user-images.githubusercontent.com/17997195/232236922-e4226acf-266a-45a7-a2aa-736e89424b52.PNG)
 
 # Weather Fax Receiver (premium only):
-![image](https://github.com/user-attachments/assets/bbf6fdd5-8dd7-4845-875a-23686861c7c0)
-![image](https://github.com/user-attachments/assets/b22fc392-0cd7-4e2d-84d1-4b76566c6218)
+![image](https://github.com/user-attachments/assets/bf8f2b81-b68c-427d-bb53-eb5258e605e6)
 
 # NavTex Receiver (premium only):
-![image](https://github.com/user-attachments/assets/19cafcb2-7b35-4286-85ee-e9d85608ce2a)
-![image](https://github.com/user-attachments/assets/0e1de081-14fb-4917-a335-ad7f967d9e3e)
+![image](https://github.com/user-attachments/assets/da748126-30ec-44ff-9127-ff67e333c749)
+![image](https://github.com/user-attachments/assets/6ddcf5f2-f489-47cf-9e03-1038be3c7a98)
 
 # Spectrum Analyzer (auto rotates with G-sensor):
 ![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/bfb5bcf5-3896-49fd-b86c-b192cf233b89)

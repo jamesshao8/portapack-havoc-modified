@@ -99,8 +99,8 @@ hacktv -f 434000000 -m i -g 47 output.mp4
 ![image](https://user-images.githubusercontent.com/17997195/229970789-78b44001-698d-452d-91e5-999efc583417.png)
 
 
-**Custom color case**
+**Aluminium case**
 
-<img width="500" alt="orange" src="https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/cdb6c75d-d207-445c-8149-cb26d1c6e72b">
+<img width="500" alt="orange" src="https://github.com/user-attachments/assets/3fd5caa5-f926-4188-9805-c2217c1321e2">
 
 

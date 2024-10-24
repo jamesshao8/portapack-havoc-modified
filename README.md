@@ -40,10 +40,7 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 
 **However, features below are only available in my firmware on H3/H3 SE.**
 
-* NavTex Reciever (NEW, only for premium version)
-* Weather Fax Receiver (NEW, only for premium version)
 * Spectrum Analyzer with G-sensor
-* Train Detector (NEW)
 * SSTV(robot8, martin m1&m2, scottie s1&s2, pd-120) receiving
 * NOAA receiving 
 * Morse receiver
@@ -63,17 +60,6 @@ GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod
 ![image](https://github.com/user-attachments/assets/af9f0fe9-46b5-48a0-aa39-4eed2a9e146b)
 ![image](https://github.com/user-attachments/assets/06d7dab6-358a-4eea-9561-f4086379f83b)
 
-
-# Train Detector (with multi-language support):
-![image](https://user-images.githubusercontent.com/17997195/232236907-0c22d5fb-5f53-4e22-87b8-b61be7243df1.PNG)
-![image](https://user-images.githubusercontent.com/17997195/232236922-e4226acf-266a-45a7-a2aa-736e89424b52.PNG)
-
-# Weather Fax Receiver (premium only):
-![image](https://github.com/user-attachments/assets/bf8f2b81-b68c-427d-bb53-eb5258e605e6)
-
-# NavTex Receiver (premium only):
-![image](https://github.com/user-attachments/assets/da748126-30ec-44ff-9127-ff67e333c749)
-![image](https://github.com/user-attachments/assets/6ddcf5f2-f489-47cf-9e03-1038be3c7a98)
 
 # Spectrum Analyzer (auto rotates with G-sensor):
 ![image](https://github.com/jamesshao8/portapack-havoc-modified/assets/17997195/bfb5bcf5-3896-49fd-b86c-b192cf233b89)

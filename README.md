@@ -20,7 +20,7 @@ https://www.aliexpress.com/item/3256804545943517.html
 
 This repository mainly focuses on hardcore DSP stuff. UI remains original HAVOC style.
 
-GPS simulator / Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
+Analog TV demodulator(PAL) / Bluetooth receiver / NRF24L01 demod / improved Pocsag tx and rx (P/N phase).
 
 **Features above are developed and published from this repository.**
 **Later taken by Mayhem, and modified to some other UI/font.**
